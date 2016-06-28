@@ -1,0 +1,13 @@
+{
+    "name": "oluwatosin/blueenrgi",
+    "authors": [
+        {
+            "name": "oluwaetosin",
+            "email": "oluwaetosin@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.4",
+        "illuminate/database": "^5.2"
+    }
+}
