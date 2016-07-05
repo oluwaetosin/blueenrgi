@@ -1,0 +1,19 @@
+{
+  "name": "blueenrgi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oluwaetosin/blueenrgi.git"
+  },
+  "author": "TosinOmotayo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oluwaetosin/blueenrgi/issues"
+  },
+  "homepage": "https://github.com/oluwaetosin/blueenrgi#readme",
+  "description": ""
+}
