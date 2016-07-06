@@ -7,15 +7,23 @@ require '../../vendor/autoload.php';
 require '../../database.php';
 $app = new \Slim\App;
 $app->get('/users/{id}', function (Request $request, Response $response) {
+    try{
      $id = $request->getAttribute('id');
      $response = Bluenergi\Users::find($id);
-     echo json_encode($response);
+     
+    } catch (Exception $ex){
+       $response = $ex->getMessage();
+    }
+    echo json_encode($response);
 });
 $app->get('/users', function (Request $request, Response $response) {
-    
+    try{
      $user =  new Bluenergi\Users();
      $response = $user->get();
      echo json_encode($response);
+    }  catch (Exception $ex){
+         throw new Exception($ex->getMessage());
+    }
 });
 $app->post('/users', function (Request $request, Response $response) {
     try {
@@ -35,12 +43,8 @@ $app->post('/users', function (Request $request, Response $response) {
      $response = $user->save();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+       $response =  $exc->getMessage();
     }
-
-
-   
-
     echo json_encode($response);
 });
 $app->put('/users/{id}', function (Request $request, Response $response) {
@@ -62,12 +66,8 @@ $app->put('/users/{id}', function (Request $request, Response $response) {
      $response = $user->save();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+       $response =  $exc->getMessage();
     }
-
-
-   
-
     echo json_encode($response);
 });
 $app->delete('/users/{id}', function (Request $request, Response $response) {
@@ -80,12 +80,8 @@ $app->delete('/users/{id}', function (Request $request, Response $response) {
      $response = $user->delete();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+        $response =  $exc->getMessage();
     }
-
-
-   
-
     echo json_encode($response);
 });
 
@@ -93,15 +89,24 @@ $app->delete('/users/{id}', function (Request $request, Response $response) {
 
 
 $app->get('/purchase/{id}', function (Request $request, Response $response) {
+    try{
      $id = $request->getAttribute('id');
      $response = Bluenergi\Purchase::find($id);
-     echo json_encode($response);
+     $response = json_encode($response);
+    }  catch (Exception $ex){
+        $response = $ex->getMessage();
+    }
+    echo $response;
 });
 $app->get('/purchase', function (Request $request, Response $response) {
-    
+    try{
      $purchase =  new Bluenergi\Purchase();
      $response = $purchase->get();
-     echo json_encode($response);
+      $response =  json_encode($response);
+    }catch(Exception $ex){
+        $response =  $ex->getMessage();
+    }
+    echo $response;
 });
 $app->post('/purchase', function (Request $request, Response $response) {
     try {
@@ -129,7 +134,7 @@ $app->post('/purchase', function (Request $request, Response $response) {
      $response = $purchase->save();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+        $response = $exc->getMessage();
     }
     echo json_encode($response);
 });
@@ -137,9 +142,7 @@ $app->post('/purchase', function (Request $request, Response $response) {
 $app->put('/purchase/{id}', function (Request $request, Response $response) {
     try {
       $data = $request->getParsedBody();
-       $id = $request->getAttribute('id');
-   //var_dump($data);
-     
+     $id = $request->getAttribute('id');  
      $purchase = \Bluenergi\Purchase::find($id);
    
      $purchase->truck_number  = filter_var($data['truck_number'],FILTER_SANITIZE_STRING);
@@ -161,93 +164,55 @@ $app->put('/purchase/{id}', function (Request $request, Response $response) {
      $response = $purchase->save();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+       $response = $exc->getMessage();
     }
     echo json_encode($response);
 });
 
 $app->delete('/purchase/{id}', function (Request $request, Response $response) {
     try {
-      $data = $request->getParsedBody();
-       $id = $request->getAttribute('id');
-   //var_dump($data);
      
+       $id = $request->getAttribute('id');  
      $purchase = \Bluenergi\Purchase::find($id);
-   
-      
      $response = $purchase->delete();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+        $response =  $exc->getMessage();
     }
     echo json_encode($response);
 });
 
-$app->put('/users/{id}', function (Request $request, Response $response) {
-    try {
-       $id = $request->getAttribute('id');
-       $data = $request->getParsedBody();
-      
-     
-     $user =  \Bluenergi\Users::find($id);
-   
-     $user->firstname  = filter_var($data['firstname'],FILTER_SANITIZE_STRING);
-     $user->lastname  = filter_var($data['lastname'],FILTER_SANITIZE_STRING);
-     $user->email  = filter_var($data['email'],FILTER_SANITIZE_STRING);
-     $user->phonenumber  = filter_var($data['phonenumber'],FILTER_SANITIZE_STRING);
-     $user->password  = md5(filter_var($data['password'],FILTER_SANITIZE_STRING));
-     $user->lastseen  = filter_var($data['lastseen'],FILTER_SANITIZE_STRING);
-     $user->level  = filter_var($data['level'],FILTER_SANITIZE_STRING);
-    
-     $response = $user->save();
-        
-    } catch (Exception $exc) {
-        echo $exc->getMessage();
-    }
-
-
-   
-
-    echo json_encode($response);
-});
-$app->delete('/users/{id}', function (Request $request, Response $response) {
-    try {
-       $id = $request->getAttribute('id');
-   //var_dump($data);
-     
-     $user =  \Bluenergi\Users::find($id);
-    
-     $response = $user->delete();
-        
-    } catch (Exception $exc) {
-        echo $exc->getMessage();
-    }
-
-
-   
-
-    echo json_encode($response);
-});
-
+ 
 $app->get('/product/{id}', function (Request $request, Response $response) {
+    try{
      $id = $request->getAttribute('id');
      $response = Bluenergi\Product::find($id);
      echo json_encode($response);
+    }  catch (Exception $ex){
+        echo $ex->getMessage();
+    }
 });
-$app->get('/product', function (Request $request, Response $response) {
-    
-     $product=  new Bluenergi\Product();
+$app->get('/products', function (Request $request, Response $response) {
+    $response = NULL;
+    try{
+     
+     $product=  new Bluenergi\Products();
      $response = $product->get();
-     echo json_encode($response);
+       
+    }  catch (Exception $ex){
+        $response = $ex->getMessage();
+    }
+    echo json_encode($response); 
 });
 
 $app->put('/product/{id}', function (Request $request, Response $response) {
+    $response =NULL;
     try {
        $id = $request->getAttribute('id');
        $data = $request->getParsedBody();
       
      
-     $product = \Bluenergi\Product::find($id);
+     $product = \Bluenergi\Products::find($id);
    
      $product->name  = filter_var($data['name'],FILTER_SANITIZE_STRING);
      $product->description  = filter_var($data['description'],FILTER_SANITIZE_STRING);
@@ -256,7 +221,7 @@ $app->put('/product/{id}', function (Request $request, Response $response) {
      $response = $product->save();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+       $response =  $exc->getMessage();
     }
     echo json_encode($response);
 });
@@ -266,7 +231,7 @@ $app->post('/product', function (Request $request, Response $response) {
     try {
        
      $data = $request->getParsedBody();
-     $product = new \Bluenergi\Product();
+     $product = new \Bluenergi\Products();
    
      $product->name  = filter_var($data['name'],FILTER_SANITIZE_STRING);
      $product->description  = filter_var($data['description'],FILTER_SANITIZE_STRING);
@@ -275,7 +240,7 @@ $app->post('/product', function (Request $request, Response $response) {
      $response = $product->save();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+        $response =  $exc->getMessage();
     }
     echo json_encode($response);
 });
@@ -286,27 +251,36 @@ $app->delete('/product/{id}', function (Request $request, Response $response) {
        $data = $request->getParsedBody();
       
      
-     $product = \Bluenergi\Product::find($id);
+     $product = \Bluenergi\Products::find($id);
    
      $response = $product->delete();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+        $response =  $exc->getMessage();
     }
     echo json_encode($response);
 });
 
 
 $app->get('/dispatch/{id}', function (Request $request, Response $response) {
+    try{
      $id = $request->getAttribute('id');
      $response = bluenergi\Dispatch::find($id);
-     echo json_encode($response);
+     
+    }  catch (Exception $ex){
+        $response = $ex->getMessage();
+    }
+    echo json_encode($response);
 });
 $app->get('/dispatch', function (Request $request, Response $response) {
-    
+    try{
      $dispatch =  new bluenergi\Dispatch();
      $response = $dispatch->get();
-     echo json_encode($response);
+     
+    }  catch (Exception $ex){
+     $response = $ex->getMessage();   
+    }
+    echo json_encode($response);
 });
 
 $app->put('/dispatch/{id}', function (Request $request, Response $response) {
@@ -332,47 +306,10 @@ $app->put('/dispatch/{id}', function (Request $request, Response $response) {
      $response = $product->save();
         
     } catch (Exception $exc) {
-        echo $exc->getMessage();
+        $response =  $exc->getMessage();
     }
     echo json_encode($response);
 });
-
-
-$app->post('/product', function (Request $request, Response $response) {
-    try {
-       
-     $data = $request->getParsedBody();
-     $product = new \Bluenergi\Product();
-   
-     $product->name  = filter_var($data['name'],FILTER_SANITIZE_STRING);
-     $product->description  = filter_var($data['description'],FILTER_SANITIZE_STRING);
-      
-    
-     $response = $product->save();
-        
-    } catch (Exception $exc) {
-        echo $exc->getMessage();
-    }
-    echo json_encode($response);
-});
-
-$app->delete('/product/{id}', function (Request $request, Response $response) {
-    try {
-       $id = $request->getAttribute('id');
-       $data = $request->getParsedBody();
-      
-     
-     $product = \Bluenergi\Product::find($id);
-   
-     $response = $product->delete();
-        
-    } catch (Exception $exc) {
-        echo $exc->getMessage();
-    }
-    echo json_encode($response);
-});
-
-
 
 $app->run();
 

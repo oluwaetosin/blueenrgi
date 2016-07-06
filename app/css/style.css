@@ -12,3 +12,30 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+html,body{min-height: 100%;}
+.login-container{padding-top: 6em}
+.login-container {color: #F8F8F2}
+.login-container label {color: #F8F8F2; font-weight: bold; font-size: 1.3em}
+h3.logo{color:#FFF; text-align: center; font-family: 'Yesteryear', cursive; text-decoration: underline; }
+.login-container input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #FF7182 inset;
+    -webkit-text-fill-color: #9F6164 !important;
+   
+}
+a.login-button{width: 100%; background: #F8DEBD; color:#9F6164; font-weight: bold; }
+
+p.signup-question{cursor: pointer;}
+.loginBody{
+    background:#FF7182;
+}
+.defaulBodyBg{
+    background: #F8F8F2;
+}
+
+.currentstate{
+    font-size: 10px;
+}
+.preloader-container{
+    padding-top: 2em;
+}

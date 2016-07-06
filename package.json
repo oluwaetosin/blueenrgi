@@ -15,5 +15,14 @@
     "url": "https://github.com/oluwaetosin/blueenrgi/issues"
   },
   "homepage": "https://github.com/oluwaetosin/blueenrgi#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "angular": "^1.5.7",
+    "angular-animate": "^1.5.7",
+    "angular-aria": "^1.5.7",
+    "angular-material": "^1.1.0-rc.5",
+    "angular-ui-router": "^0.3.1",
+    "grunt": "^1.0.1",
+    "ui-router": "^1.0.0-alpha.3"
+  }
 }
