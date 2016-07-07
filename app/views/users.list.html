@@ -1,0 +1,27 @@
+<ul class="collection">
+        <li class="collection-item" ng-repeat="user in users">
+      <i class="material-icons">account_circle</i>
+      <span class="title">{{user.firstname}} {{user.lastname}}</span>
+      <p>{{user.email}} {{user.phonenumber}}
+      </p>
+      <p>
+          <a href="" class="waves-effect waves-light" ng-click="edit(user)"><i class="material-icons right">mode_edit</i></a>
+          <a href="" class="waves-effect waves-light"  ng-click="delete(user)"><i class="material-icons right">delete</i></a>
+      </p>
+    </li>
+      </ul>
+<div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Confirm Delete</h4>
+      <p>User: {{activeUser.firstname}} {{activeUser.lastname}}</p>
+    </div>
+    <div class="modal-footer">
+        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="confirmDelete(activeUser.id)">Confirm Delete</a>
+        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="cancel()">Cancel</a>
+    </div>
+  </div>
+ <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red" ui-sref="users.new">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>

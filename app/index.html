@@ -31,7 +31,7 @@
         <li><a ui-sref="products.list">Product</a></li>
         <li><a href="badges.html">Purchase</a></li>
         <li><a href="collapsible.html">Dispatch</a></li>
-         <li><a href="collapsible.html">Users</a></li>
+         <li><a ui-sref="users.list">Users</a></li>
       </ul>
      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         
@@ -64,6 +64,7 @@
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="../node_modules/underscore/underscore-min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="../node_modules/angular/angular.js"></script>
@@ -76,10 +77,13 @@
   <script src="app.js"></script>
   <!--factory> -->
   <script src="factory/apiManager.js"></script> 
+  <script src="factory/genOps.js"></script> 
   <script src="constants/myConfig.js"></script> 
   <script src="controller/parentController.js"></script>
   <script src="controller/loginSignupCtrl.js"></script>
   <script src="controller/productCtrl.js"></script>
   <script src="controller/newProductCtrl.js"></script>
+  <script src="controller/editProductCtrl.js"></script>
+  <script src="controller/usersListCtrl.js"></script>
   </body>
 </html>

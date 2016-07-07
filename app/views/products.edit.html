@@ -1,0 +1,25 @@
+<div class="container">
+<form class="col s12" autocomplete="off">
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="name" ng-model="activeProduct.name" type="text" class="validate">
+          <label for="name">Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <textarea id="name" class="materialize-textarea" ng-model="activeProduct.description"></textarea>
+          <label for="description">Description</label>
+        </div>
+      </div>
+      
+        <div>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="updateProduct(activeProduct)" ng-disabled="!activeProduct.name || !activeProduct.description || !isPreloading "><i class="left material-icons">send </i>Update Product</a>
+        </div>
+    </form>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red" ui-sref="products.list">
+      <i class="material-icons">list</i>
+    </a>
+  </div>
+</div>

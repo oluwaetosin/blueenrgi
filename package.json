@@ -23,6 +23,7 @@
     "angular-material": "^1.1.0-rc.5",
     "angular-ui-router": "^0.3.1",
     "grunt": "^1.0.1",
-    "ui-router": "^1.0.0-alpha.3"
+    "ui-router": "^1.0.0-alpha.3",
+    "underscore": "^1.8.3"
   }
 }

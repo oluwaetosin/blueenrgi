@@ -186,14 +186,15 @@ $app->delete('/purchase/{id}', function (Request $request, Response $response) {
 $app->get('/product/{id}', function (Request $request, Response $response) {
     try{
      $id = $request->getAttribute('id');
-     $response = Bluenergi\Product::find($id);
-     echo json_encode($response);
+     $response = Bluenergi\Products::find($id);
+    
     }  catch (Exception $ex){
-        echo $ex->getMessage();
+       $response =  $ex->getMessage();
     }
+     echo json_encode($response);
 });
 $app->get('/products', function (Request $request, Response $response) {
-    $response = NULL;
+ 
     try{
      
      $product=  new Bluenergi\Products();
@@ -248,9 +249,7 @@ $app->post('/product', function (Request $request, Response $response) {
 $app->delete('/product/{id}', function (Request $request, Response $response) {
     try {
        $id = $request->getAttribute('id');
-       $data = $request->getParsedBody();
-      
-     
+    
      $product = \Bluenergi\Products::find($id);
    
      $response = $product->delete();
