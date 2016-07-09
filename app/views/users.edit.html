@@ -1,0 +1,49 @@
+
+<div class="container">
+<form class="col s12" autocomplete="off">
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="firstname" ng-model="activeUser.firstname" type="text" class="validate">
+          <label for="firstname">Firstname</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="lastname" ng-model="activeUser.lastname" type="text" class="validate">
+          <label for="lastname">Lastname</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="email" ng-model="activeUser.email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="phonenumber" ng-model="activeUser.phonenumber" type="text" class="validate">
+          <label for="phonenumber">Phone Number</label>
+        </div>
+      </div>
+      
+    <div class="row">
+       
+      <div class="input-field col s12">
+    <select id="level" ng-model="activeUser.level">
+      
+        <option value="{{value}}" ng-repeat="(key, value) in levels" ng-selected="value == activeUser.level">{{key}}</option>
+       
+    </select>
+    <label for="level">Level</label>
+  </div>
+    </div>
+        <div>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="updateUser(activeUser)" ng-disabled="!activeProduct.name || !activeProduct.description || !isPreloading "><i class="left material-icons">send </i>Update Product</a>
+        </div>
+    </form>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red" ui-sref="users.list">
+      <i class="material-icons">list</i>
+    </a>
+  </div>
+</div>

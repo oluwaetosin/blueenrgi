@@ -47,7 +47,7 @@ $app->post('/users', function (Request $request, Response $response) {
     }
     echo json_encode($response);
 });
-$app->put('/users/{id}', function (Request $request, Response $response) {
+$app->put('/user/{id}', function (Request $request, Response $response) {
     try {
        $id = $request->getAttribute('id');
        $data = $request->getParsedBody();

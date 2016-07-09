@@ -41,7 +41,19 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
                 url: apiUrl + "users" 
             });
         };
-        
+         api.getUser = function(_id){
+            return $http({
+                method: 'GET',
+                url: apiUrl + "users/" + _id 
+            });
+        }; 
+        api.updateUser = function(_user){
+            return $http({
+                method: 'PUT',
+                url: apiUrl + "user/" + _user.id,
+                data : _user
+            });
+        }; 
         api.deleteUser = function(_id){
             return $http({
                 method: 'DELETE',

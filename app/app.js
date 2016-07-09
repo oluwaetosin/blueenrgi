@@ -37,12 +37,12 @@ var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
                                controller: 'usersListCtrl'
                            })
                            .state('users.edit',{
-                               url: '/users/edit',
+                               url: '/users/edit/:id',
                                templateUrl: 'views/users.edit.html',
-                               controller: 'usersEditCtrl'
+                               controller: 'editUserCtrl'
                            });
                            
-                 }])
+                 }]);
                  
                  
 

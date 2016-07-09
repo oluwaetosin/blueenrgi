@@ -1,6 +1,7 @@
-app.controller('editUserCtrl',['$scope','ApiManager','GenOps','$stateParams',function($scope,ApiManager,GenOps,$stateParams ){
+app.controller('editUserCtrl',['$scope','ApiManager','GenOps','$stateParams','myConfig',
+                       '$timeout',function($scope,ApiManager,GenOps,$stateParams,myConfig,$timeout){
    $scope.activeUser = GenOps.getActiveProduct();
-   
+   $scope.levels = myConfig.levels;
    if(!$scope.activeUser){
      var id = $stateParams.id;
        $scope.$parent.$parent.isPreloading = true;
@@ -31,6 +32,9 @@ app.controller('editUserCtrl',['$scope','ApiManager','GenOps','$stateParams',fun
                   alert("Failure");
                $scope.$parent.$parent.isPreloading = false;
               });
-    };        
+    };  
+    $timeout(function(){
+          $('select').material_select();
+    },3000);
 }]);
 
