@@ -1,0 +1,111 @@
+<div class="container">
+<form class="col s12" autocomplete="off">
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="truck_number" ng-model="purchase.truck_number" type="number" class="validate">
+          <label for="truck_number">Truck Number</label>
+        </div>
+      </div>
+      <div class="row">
+       
+      <div class="input-field col s12">
+    <select id="product" ng-model="purchase.product_Id">
+      
+        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+       
+    </select>
+    <label for="product">Product</label>
+  </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="quantity" ng-model="purchase.quantity" type="number" class="validate">
+          <label for="quantity">Quantity</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="amount_payed" ng-model="purchase.amount_payed" type="number" step="0" class="validate">
+          <label for="amount_payed">Amount Payed</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="bank" ng-model="purchase.bank" type="text" class="validate">
+          <label for="bank">Bank</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="ticket_no" ng-model="purchase.ticket_no" type="text" class="validate">
+          <label for="ticket_no">Ticket Number</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="depot" ng-model="purchase.depot" type="text" class="validate">
+          <label for="depot">Depot</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="quantity_confirmed" ng-model="purchase.quantity_confirmed" type="number" class="validate">
+          <label for="quantity_confirmed">Quantity Confirmed</label>
+        </div>
+      </div>
+      <div class="input-field col s12">
+    <select id="product_Id_confirmed" ng-model="purchase.product_Id_confirmed">
+      
+        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+       
+    </select>
+    <label for="product_Id_confirmed">Confirm Product</label>
+  </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="clearance_amount" ng-model="purchase.clearance_amount" type="number" class="validate">
+          <label for="clearance_amount">clearance_amount</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="clearnace_bank" ng-model="purchase.clearnace_bank" type="text" class="validate">
+          <label for="clearnace_bank">Clearance Bank</label>
+        </div>
+      </div>
+    </div>
+   <div class="row">
+      <div class="input-field col s12">
+    <select id="product_cleared" ng-model="purchase.product_cleared">
+      
+        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+       
+    </select>
+    <label for="product_cleared">Product Cleared</label>
+  </div>
+   </div>
+    <div class="row">
+    
+  
+         <md-datepicker ng-model="purchase.purchase_date" md-placeholder="Enter date"></md-datepicker>
+    
+    
+    </div>
+    <div class="row">
+    <div class="input-field col s12">
+        <input  id="price_per_litre" ng-model="purchase.price_per_litre" type="number" step="0" class="validate">
+          <label for="price_per_litre">Price Per liter</label>
+        </div>
+    </div>
+    
+    <br><br>
+ 
+        <div>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="addPurchase(purchase)" ng-disabled="isPreloading"><i class="left material-icons">send </i>Add Purchase</a>
+        </div>
+    </form>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red" ui-sref="products.list">
+      <i class="material-icons">list</i>
+    </a>
+  </div>
+</div>

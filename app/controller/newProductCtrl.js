@@ -19,6 +19,7 @@ app.controller('newProductCtrl',['$scope','ApiManager',function($scope,ApiManage
                   alert("Failure");
                $scope.$parent.$parent.isPreloading = false;
               });
-    };        
+    };  
+    
 }]);
 

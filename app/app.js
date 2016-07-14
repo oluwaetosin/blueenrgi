@@ -40,6 +40,20 @@ var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
                                url: '/users/edit/:id',
                                templateUrl: 'views/users.edit.html',
                                controller: 'editUserCtrl'
+                           })
+                            .state('purchase',{
+                               url: '/purchase',
+                               templateUrl: 'views/purchase.html'
+                           })
+                           .state('purchase.list',{
+                               url: '/purchase/list',
+                               templateUrl: 'views/purchase.list.html',
+                               controller: 'purchaseListCtrl'
+                           })
+                           .state('purchase.new',{
+                               url: '/purchase/new',
+                               templateUrl: 'views/purchase.new.html',
+                               controller: 'newPurchaseCtrl'
                            });
                            
                  }]);

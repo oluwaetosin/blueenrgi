@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Yesteryear' rel='stylesheet' type='text/css'>
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="../node_modules/angular-material/angular-material.min.css" rel="stylesheet">
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body ng-class="{loginBody: isLoginPage, defaulBodyBg : !isLoginPage}">
@@ -29,7 +30,7 @@
       <ul id="nav-mobile" class="side-nav">
         <li><a href="sass.html">Home</a></li>
         <li><a ui-sref="products.list">Product</a></li>
-        <li><a href="badges.html">Purchase</a></li>
+        <li><a ui-sref="purchase.list">Purchase</a></li>
         <li><a href="collapsible.html">Dispatch</a></li>
          <li><a ui-sref="users.list">Users</a></li>
       </ul>
@@ -86,5 +87,7 @@
   <script src="controller/editProductCtrl.js"></script>
   <script src="controller/usersListCtrl.js"></script>
   <script src="controller/editUserCtrl.js"></script>
+  <script src="controller/purchaseListCtrl.js"></script>
+  <script src="controller/newPurchaseCtrl.js"></script>
   </body>
 </html>
