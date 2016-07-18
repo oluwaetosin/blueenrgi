@@ -64,12 +64,8 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
         };
         
         
-         api.getPurchases = function(){
-            return $http({
-                method: 'GET',
-                url: apiUrl + "purchase" 
-            });
-        };
+        
+        
         api.addPurchase = function(_purchase){
             return $http({
                 method: 'POST',
@@ -97,6 +93,41 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
                 url: apiUrl + "purchase/" +_id 
             });
         };
+        
+         api.getDispatches = function(){
+            return $http({
+                method: 'GET',
+                url: apiUrl + "dispatch" 
+            });
+        };
+        api.getDispatch = function(_id){
+            return $http({
+                method: 'GET',
+                url: apiUrl + "dispatch/" + _id
+            });
+        };
+        
+        api.addDispatch = function(_dispatch){
+            return $http({
+                method: 'POST',
+                url: apiUrl + "dispatch",
+                data: _dispatch
+            });
+        };
+        api.updateDispatch = function(_dispatch){
+            return $http({
+                method: 'PUT',
+                url: apiUrl + "dispatch/" + _dispatch.id,
+                data : _dispatch
+            });
+        }; 
+        api.deleteDispatch = function(_id){
+            return $http({
+                method: 'DELETE',
+                url: apiUrl + "dispatch/" +_id 
+            });
+        };
+        
        return api;
             
 }]);

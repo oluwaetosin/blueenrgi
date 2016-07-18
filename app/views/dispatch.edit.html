@@ -1,0 +1,73 @@
+<div class="container">
+<form class="col s12" autocomplete="off">
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="purchaseId" ng-model="activeDispatch.purchase_Id" type="number" class="validate">
+          <label for="purchaseId">PurchaseId</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="customerId" ng-model="activeDispatch.customer_Id" type="number" class="validate">
+          <label for="customerId">CustomerId</label>
+        </div>
+      </div>
+        <div class="row">
+        <div class="input-field col s12">
+            <input  id="soldQty" ng-model="activeDispatch.sold_qty" type="number" class="validate">
+          <label for="soldQty">Sold Quantity</label>
+        </div>
+      </div>
+        <div class="row">
+        <div class="input-field col s12">
+            <input  id="storageBalance" ng-model="activeDispatch.storage_balance" type="number" step="0" class="validate">
+          <label for="storageBalance">Storage Balance</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="soldRate" ng-model="activeDispatch.sold_rate" type="number" step="0" class="validate">
+          <label for="soldRate">Sold Rate</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="outstanding" ng-model="activeDispatch.outstanding" type="number" class="validate">
+          <label for="outstanding">Sold Rate</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="paymentDueDate" ng-model="activeDispatch.payment_due_date" type="date" class="validate">
+          <label for="paymentDueDate">Payment Due Date</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="paymentDueDate" ng-model="activeDispatch.actual_payment_date" type="date" class="validate">
+          <label for="actualPaymentDate">Actual Payment Date</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="amount_paid" ng-model="activeDispatch.amount_paid" type="number" step="0" class="validate">
+          <label for="amount_paid">Amount Paid</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <textarea id="comment" class="materialize-textarea" ng-model="activeDispatch.comment"></textarea>
+          <label for="comment">Comment</label>
+        </div>
+      </div>
+        <div>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="updateDispatch(activeDispatch)" ng-disabled="isPreloading "><i class="left material-icons">send </i>Add Dispatch</a>
+        </div>
+    </form>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red" ui-sref="activeDispatch.list">
+      <i class="material-icons">list</i>
+    </a>
+  </div>
+</div>
+

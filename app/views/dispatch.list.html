@@ -1,0 +1,56 @@
+<table ng-if="dispatch.length != 0">
+        <thead>
+          <tr>
+              <th data-field="id">Purchase Id</th>
+              <th data-field="name">Customer Id</th>
+              <th data-field="price">Sold Quantity</th>
+              <th data-field="id">Storage Balance</th>
+              <th data-field="name">Sold Rate</th>
+              <th data-field="price">Outstanding</th>
+              <th data-field="price">Payment Due Date</th>
+              <th data-field="price">Actual Payment Date</th>
+              <th data-field="price">Amount Paid</th>
+              <th data-field="price">Comment</th>
+              <th data-field="price">Edit</th>
+              <th data-field="price">Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="currentDispatch in dispatch">
+            <td>{{currentDispatch.purchase_Id}}</td>
+            <td>{{currentDispatch.firstname}} {{currentDispatch.lastname}}</td>
+             <td>{{currentDispatch.sold_qty}}</td>
+             <td>{{currentDispatch.storage_balance}}</td>
+             <td>{{currentDispatch.sold_rate}}</td>
+             <td>{{currentDispatch.outstanding}}</td>
+             <td>{{currentDispatch.payment_due_date}}</td>
+             <td>{{currentDispatch.actual_payment_date}}</td>
+             <td>{{currentDispatch.amount_paid}}</td>
+              <td>{{currentDispatch.comment}}</td>
+            <td> <a href="" class="waves-effect waves-light" ng-click="edit(currentDispatch)"><i class="material-icons right">mode_edit</i></a></td>
+             <td> <a href="" class="waves-effect waves-light" ng-click="delete(currentDispatch)"><i class="material-icons right">delete</i></a></td>
+          </tr>
+           
+        </tbody>
+      </table>
+<div ng-if="dispatch.length == 0">
+    <div class="card-panel teal blue lighten-3"><span class='center-align'>Record is Empty</span></div>
+            
+
+</div>
+<div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Confirm Delete</h4>
+      <p>Purchase Id:  {{activeDispatch.purchase_Id}} </p>
+    </div>
+    <div class="modal-footer">
+        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="confirmDelete(activeDispatch.id)">Confirm Delete</a>
+        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="cancel()">Cancel</a>
+    </div>
+  </div>
+ <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red" ui-sref="dispatch.new">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>

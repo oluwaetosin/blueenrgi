@@ -1,30 +1,27 @@
-app.controller('editUserCtrl',['$scope','ApiManager','GenOps','$stateParams','myConfig',
-                       '$timeout',function($scope,ApiManager,GenOps,$stateParams,myConfig,$timeout){
-   $scope.activeUser = GenOps.getActiveUser();
-   $scope.levels = myConfig.levels;
-   if(!$scope.activeUser){
+app.controller('editDispatchCtrl',['$scope','ApiManager','GenOps','$stateParams',function($scope,ApiManager,GenOps,$stateParams ){
+   $scope.activeDispatch = GenOps.getActiveDispatch();
+   
+   if(!$scope.activeDispatch){
      var id = $stateParams.id;
        $scope.$parent.$parent.isPreloading = true;
-     ApiManager.getUser(id)
+     ApiManager.getDispatch(id)
              .success(function(data){
-                 $scope.activeUser = data;
+                 $scope.activeDispatch = data;
                  $scope.$parent.$parent.isPreloading = false;  
              })
              .error(function(){
                   $scope.$parent.$parent.isPreloading = false; 
              });
    }
-   $scope.updateUser = function(_activeUser){
-      if(!_activeUser.email || !_activeUser.firstname || !_activeUser.phonenumber){
-          return false;
-      } 
+   $scope.updateDispatch = function(_activeDispatch){
+      
      
         $scope.$parent.$parent.isPreloading = true;
-      ApiManager.updateUser(_activeUser)
+      ApiManager.updateProduct(_activeDispatch)
               .success(function(data){
                 if(data){
                     alert("Success");
-       
+            
             $scope.$parent.$parent.isPreloading = false; 
                 }
               })
@@ -32,9 +29,6 @@ app.controller('editUserCtrl',['$scope','ApiManager','GenOps','$stateParams','my
                   alert("Failure");
                $scope.$parent.$parent.isPreloading = false;
               });
-    };  
-    $timeout(function(){
-          $('select').material_select();
-    },3000);
+    };        
 }]);
 

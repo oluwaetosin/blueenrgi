@@ -6,14 +6,14 @@
  * and open the template in the editor.
  */
 
-namespace bluenergi;
+namespace Bluenergi;
 
 /**
  * Description of Dispatch
  *
  * @author OLUWATOSIN
  */
-class Dispatch extends \Illuminate\Database\Eloquent\Model {
+class Dispatches extends \Illuminate\Database\Eloquent\Model {
 //    //put your code here
 //    private $dispatch_Id;
 //    private $purchase_Id;

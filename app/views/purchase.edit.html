@@ -2,14 +2,14 @@
 <form class="col s12" autocomplete="off">
       <div class="row">
         <div class="input-field col s12">
-            <input  id="truck_number" ng-model="purchase.truck_number" type="number" class="validate">
+            <input  id="truck_number" ng-model="activePurchase.truck_number" type="text" class="validate">
           <label for="truck_number">Truck Number</label>
         </div>
       </div>
       <div class="row">
        
       <div class="input-field col s12">
-    <select id="product" ng-model="purchase.product_Id">
+    <select id="product" ng-model="activePurchase.product_Id">
       
         <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
        
@@ -18,48 +18,48 @@
   </div>
           <div class="row">
         <div class="input-field col s12">
-            <input  id="usersId" ng-model="purchase.users_Id" type="number" class="validate">
+            <input  id="usersId" ng-model="activePurchase.users_Id" type="number" class="validate">
           <label for="usersId">User</label>
         </div>
       </div>
     <div class="row">
         <div class="input-field col s12">
-            <input  id="quantity" ng-model="purchase.quantity" type="number" class="validate">
+            <input  id="quantity" ng-model="activePurchase.quantity" type="number" class="validate">
           <label for="quantity">Quantity</label>
         </div>
       </div>
        <div class="row">
         <div class="input-field col s12">
-            <input  id="amount_payed" ng-model="purchase.amount_payed" type="number" step="0" class="validate">
+            <input  id="amount_payed" ng-model="activePurchase.amount_payed" type="number" step="0" class="validate">
           <label for="amount_payed">Amount Payed</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-            <input  id="bank" ng-model="purchase.bank" type="text" class="validate">
+            <input  id="bank" ng-model="activePurchase.bank" type="text" class="validate">
           <label for="bank">Bank</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-            <input  id="ticket_no" ng-model="purchase.ticket_no" type="text" class="validate">
+            <input  id="ticket_no" ng-model="activePurchase.ticket_no" type="text" class="validate">
           <label for="ticket_no">Ticket Number</label>
         </div>
       </div>
        <div class="row">
         <div class="input-field col s12">
-            <input  id="depot" ng-model="purchase.depot" type="text" class="validate">
+            <input  id="depot" ng-model="activePurchase.depot" type="text" class="validate">
           <label for="depot">Depot</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-            <input  id="quantity_confirmed" ng-model="purchase.quantity_confirmed" type="number" class="validate">
+            <input  id="quantity_confirmed" ng-model="activePurchase.quantity_confirmed" type="number" class="validate">
           <label for="quantity_confirmed">Quantity Confirmed</label>
         </div>
       </div>
       <div class="input-field col s12">
-    <select id="product_Id_confirmed" ng-model="purchase.product_Id_confirmed">
+    <select id="product_Id_confirmed" ng-model="activePurchase.product_Id_confirmed">
       
         <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
        
@@ -68,20 +68,20 @@
   </div>
       <div class="row">
         <div class="input-field col s12">
-            <input  id="clearance_amount" ng-model="purchase.clearance_amount" type="number" class="validate">
+            <input  id="clearance_amount" ng-model="activePurchase.clearance_amount" type="number" class="validate">
           <label for="clearance_amount">clearance_amount</label>
         </div>
       </div>
        <div class="row">
         <div class="input-field col s12">
-            <input  id="clearnace_bank" ng-model="purchase.clearnace_bank" type="text" class="validate">
+            <input  id="clearnace_bank" ng-model="activePurchase.clearnace_bank" type="text" class="validate">
           <label for="clearnace_bank">Clearance Bank</label>
         </div>
       </div>
     </div>
    <div class="row">
       <div class="input-field col s12">
-    <select id="product_cleared" ng-model="purchase.product_cleared">
+    <select id="product_cleared" ng-model="activePurchase.product_cleared">
       
         <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
        
@@ -92,13 +92,13 @@
     <div class="row">
     
   
-         <md-datepicker ng-model="purchase.purchase_date" md-placeholder="Enter date"></md-datepicker>
+         <md-datepicker ng-model="activePurchase.activePurchase_date" md-placeholder="Enter date"></md-datepicker>
     
     
     </div>
     <div class="row">
     <div class="input-field col s12">
-        <input  id="price_per_litre" ng-model="purchase.price_per_litre" type="number" step="0" class="validate">
+        <input  id="price_per_litre" ng-model="activePurchase.price_per_litre" type="number" step="0" class="validate">
           <label for="price_per_litre">Price Per liter</label>
         </div>
     </div>
@@ -106,11 +106,11 @@
     <br><br>
  
         <div>
-            <a class="waves-effect waves-light btn btn-block login-button" ng-click="addPurchase(purchase)" ng-disabled="isPreloading"><i class="left material-icons">send </i>Add Purchase</a>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="updatePurchase(activePurchase)" ng-disabled="isPreloading"><i class="left material-icons">send </i>Add Purchase</a>
         </div>
     </form>
     <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red" ui-sref="products.list">
+    <a class="btn-floating btn-large red" ui-sref="purchase.list">
       <i class="material-icons">list</i>
     </a>
   </div>

@@ -5,8 +5,8 @@
       <p>{{purchase.purchase_date}}
       </p>
       <p>
-          <a href="" class="waves-effect waves-light" ng-click="edit(user)"><i class="material-icons right">mode_edit</i></a>
-          <a href="" class="waves-effect waves-light"  ng-click="delete(user)"><i class="material-icons right">delete</i></a>
+          <a href="" class="waves-effect waves-light" ng-click="edit(purchase)"><i class="material-icons right">mode_edit</i></a>
+          <a href="" class="waves-effect waves-light"  ng-click="delete(purchase)"><i class="material-icons right">delete</i></a>
       </p>
     </li>
       </ul>
@@ -16,7 +16,7 @@
       <p> {{purchase.truck_number}} <br> {{purchase.purchase_date}}</p>
     </div>
     <div class="modal-footer">
-        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="confirmDelete(activeUser.id)">Confirm Delete</a>
+        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="confirmDelete(activePurchase.id)">Confirm Delete</a>
         <a href="" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="cancel()">Cancel</a>
     </div>
   </div>

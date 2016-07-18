@@ -13,6 +13,14 @@ app.controller('newPurchaseCtrl',['$scope','ApiManager','GenOps','$stateParams',
                $scope.$parent.isPreloading = false;
            });
       $scope.addPurchase = function (_purchase){
+          if (_purchase.purchase_date instanceof Date){
+           var year = _purchase.purchase_date.getFullYear();
+           var month =  _purchase.purchase_date.getMonth();
+           month = month.toString().length == 1 ? "0" + month.toString() : month;
+           var day = _purchase.purchase_date.getDate();
+           _purchase.purchase_date  = year + "-" + month + "-" + day;
+           
+          }
      ApiManager.addPurchase(_purchase)
               .success(function(data){
                 if(data){

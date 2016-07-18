@@ -264,7 +264,7 @@ $app->delete('/product/{id}', function (Request $request, Response $response) {
 $app->get('/dispatch/{id}', function (Request $request, Response $response) {
     try{
      $id = $request->getAttribute('id');
-     $response = bluenergi\Dispatch::find($id);
+     $response = Bluenergi\Dispatches::find($id);
      
     }  catch (Exception $ex){
         $response = $ex->getMessage();
@@ -273,8 +273,10 @@ $app->get('/dispatch/{id}', function (Request $request, Response $response) {
 });
 $app->get('/dispatch', function (Request $request, Response $response) {
     try{
-     $dispatch =  new bluenergi\Dispatch();
-     $response = $dispatch->get();
+     $dispatch =  new Bluenergi\Dispatches();
+     $response = $dispatch->join('users','users.id','=','dispatches.customer_Id')
+                          ->select("dispatches.*","users.firstname as firstname","users.lastname as lastname")
+                          ->get();
      
     }  catch (Exception $ex){
      $response = $ex->getMessage();   
@@ -288,7 +290,7 @@ $app->put('/dispatch/{id}', function (Request $request, Response $response) {
        $data = $request->getParsedBody();
       
      
-     $dispatch = \bluenergi\Dispatch::find($id);
+     $dispatch = \Bluenergi\Dispatches::find($id);
    
      $dispatch->purchase_Id         = filter_var($data['purchase_Id'],FILTER_SANITIZE_STRING);
      $dispatch->customer_Id         = filter_var($data['customer_Id'],FILTER_SANITIZE_STRING);
@@ -309,6 +311,42 @@ $app->put('/dispatch/{id}', function (Request $request, Response $response) {
     }
     echo json_encode($response);
 });
-
+$app->post('/dispatch', function (Request $request, Response $response) {
+    try {
+       
+     $data = $request->getParsedBody();
+     $dispatch = new \Bluenergi\Dispatches();
+   
+      $dispatch->purchase_Id         = filter_var($data['purchase_Id'],FILTER_SANITIZE_STRING);
+     $dispatch->customer_Id         = filter_var($data['customer_Id'],FILTER_SANITIZE_STRING);
+     $dispatch->sold_qty            = filter_var($data['sold_qty'],FILTER_SANITIZE_STRING);
+     $dispatch->storage_balance     = filter_var($data['storage_balance'],FILTER_SANITIZE_STRING);
+     $dispatch->sold_rate           = filter_var($data['sold_rate'],FILTER_SANITIZE_STRING);
+     $dispatch->outstanding         = filter_var($data['outstanding'],FILTER_SANITIZE_STRING);
+     $dispatch->payment_due_date    = filter_var($data['payment_due_date'],FILTER_SANITIZE_STRING);
+     $dispatch->actual_payment_date = filter_var($data['actual_payment_date'],FILTER_SANITIZE_STRING);
+     $dispatch->amount_paid         = filter_var($data['amount_paid'],FILTER_SANITIZE_STRING);
+      $dispatch->comment             = filter_var($data['comment'],FILTER_SANITIZE_STRING);
+      
+    
+     $response = $dispatch->save();
+        
+    } catch (Exception $exc) {
+        $response =  $exc->getMessage();
+    }
+    echo json_encode($response);
+});
+$app->delete('/dispatch/{id}', function (Request $request, Response $response) {
+    try {
+     
+       $id = $request->getAttribute('id');  
+     $purchase = \Bluenergi\Dispatches::find($id);
+     $response = $purchase->delete();
+        
+    } catch (Exception $exc) {
+        $response =  $exc->getMessage();
+    }
+    echo json_encode($response);
+});
 $app->run();
 
