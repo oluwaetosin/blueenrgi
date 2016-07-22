@@ -1,0 +1,40 @@
+<div class="container">
+<form class="col s12" autocomplete="off">
+       
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="truck_number" ng-model="purchase.purchase_id" type="number" class="validate">
+          <label for="truck_number">Purchase Id</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="clearance_amount" ng-model="purchase.clearance_amount" type="number" class="validate">
+          <label for="clearance_amount">Amount Cleared</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="clearnace_bank" ng-model="purchase.clearance_bank" type="text" class="validate">
+          <label for="clearnace_bank">Clearance Bank</label>
+        </div>
+      </div>
+   
+   <div class="row">
+      <div class="input-field col s12">
+    <select id="product_cleared" ng-model="purchase.product_cleared">
+      
+        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+       
+    </select>
+    <label for="product_cleared">Product</label>
+  </div>
+   </div>
+    <br><br>
+ 
+        <div>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="addPurchase(purchase)" ng-disabled="isPreloading"><i class="left material-icons">send </i>Add Purchase</a>
+        </div>
+    </form>
+    
+</div>

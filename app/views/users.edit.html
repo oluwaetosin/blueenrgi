@@ -4,25 +4,25 @@
       <div class="row">
         <div class="input-field col s12">
             <input  id="firstname" ng-model="activeUser.firstname" type="text" class="validate">
-          <label for="firstname">Firstname</label>
+          <label  class="active" for="firstname">Firstname</label>
         </div>
       </div>
     <div class="row">
         <div class="input-field col s12">
             <input  id="lastname" ng-model="activeUser.lastname" type="text" class="validate">
-          <label for="lastname">Lastname</label>
+          <label  class="active" for="lastname">Lastname</label>
         </div>
       </div>
     <div class="row">
         <div class="input-field col s12">
             <input  id="email" ng-model="activeUser.email" type="email" class="validate">
-          <label for="email">Email</label>
+          <label  class="active" for="email">Email</label>
         </div>
       </div>
     <div class="row">
         <div class="input-field col s12">
             <input  id="phonenumber" ng-model="activeUser.phonenumber" type="text" class="validate">
-          <label for="phonenumber">Phone Number</label>
+          <label  class="active" for="phonenumber">Phone Number</label>
         </div>
       </div>
       
@@ -34,7 +34,7 @@
         <option value="{{value}}" ng-repeat="(key, value) in levels" ng-selected="value == activeUser.level">{{key}}</option>
        
     </select>
-    <label for="level">Level</label>
+    <label  class="active" for="level">Level</label>
   </div>
     </div>
         <div>

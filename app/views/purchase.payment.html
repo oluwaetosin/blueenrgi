@@ -16,12 +16,15 @@
     </select>
     <label for="product">Product</label>
   </div>
-          <div class="row">
-        <div class="input-field col s12">
-            <input  id="usersId" ng-model="purchase.users_Id" type="number" class="validate">
-          <label for="usersId">User</label>
-        </div>
-      </div>
+          <div class="input-field col s12">
+    <select id="usersId" ng-model="purchase.users_Id">
+      
+        <option value="{{user.id}}" ng-repeat="user in users">{{user.firstname}} {{user.lastname}}</option>
+       
+    </select>
+    <label for="usersId">Users</label>
+  </div>
+         
     <div class="row">
         <div class="input-field col s12">
             <input  id="quantity" ng-model="purchase.quantity" type="number" class="validate">
@@ -52,57 +55,10 @@
           <label for="depot">Depot</label>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s12">
-            <input  id="quantity_confirmed" ng-model="purchase.quantity_confirmed" type="number" class="validate">
-          <label for="quantity_confirmed">Quantity Confirmed</label>
-        </div>
-      </div>
-      <div class="input-field col s12">
-    <select id="product_Id_confirmed" ng-model="purchase.product_Id_confirmed">
+    
       
-        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
-       
-    </select>
-    <label for="product_Id_confirmed">Confirm Product</label>
-  </div>
-      <div class="row">
-        <div class="input-field col s12">
-            <input  id="clearance_amount" ng-model="purchase.clearance_amount" type="number" class="validate">
-          <label for="clearance_amount">clearance_amount</label>
-        </div>
-      </div>
-       <div class="row">
-        <div class="input-field col s12">
-            <input  id="clearnace_bank" ng-model="purchase.clearance_bank" type="text" class="validate">
-          <label for="clearnace_bank">Clearance Bank</label>
-        </div>
-      </div>
-    </div>
-   <div class="row">
-      <div class="input-field col s12">
-    <select id="product_cleared" ng-model="purchase.product_cleared">
-      
-        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
-       
-    </select>
-    <label for="product_cleared">Product Cleared</label>
-  </div>
-   </div>
-    <div class="row">
-    
-  
-         <md-datepicker ng-model="purchase.purchase_date" md-placeholder="Enter date"></md-datepicker>
-    
-    
-    </div>
-    <div class="row">
-    <div class="input-field col s12">
-        <input  id="price_per_litre" ng-model="purchase.price_per_litre" type="number" step="0" class="validate">
-          <label for="price_per_litre">Price Per liter</label>
-        </div>
-    </div>
-    
+ 
+   
     <br><br>
  
         <div>

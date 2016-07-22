@@ -111,7 +111,7 @@ $app->get('/purchase', function (Request $request, Response $response) {
 $app->post('/purchase', function (Request $request, Response $response) {
     try {
       $data = $request->getParsedBody();
-   //var_dump($data);
+   var_dump($data);
      
      $purchase = new \Bluenergi\Purchase();
    
@@ -126,7 +126,7 @@ $app->post('/purchase', function (Request $request, Response $response) {
      $purchase->quantity_confirmed  = filter_var($data['quantity_confirmed'],FILTER_SANITIZE_STRING);
      $purchase->product_Id_confirmed  = filter_var($data['product_Id_confirmed'],FILTER_SANITIZE_STRING);   
      $purchase->clearance_amount  = filter_var($data['clearance_amount'],FILTER_SANITIZE_STRING);
-     $purchase->clearnace_bank  = filter_var($data['clearnace_bank'],FILTER_SANITIZE_STRING);
+     $purchase->clearance_bank  = filter_var($data['clearance_bank'],FILTER_SANITIZE_STRING);
      $purchase->product_cleared  = filter_var($data['product_cleared'],FILTER_SANITIZE_STRING);
      $purchase->price_per_litre  = filter_var($data['price_per_litre'],FILTER_SANITIZE_STRING);
      $purchase->purchase_date  = filter_var($data['purchase_date'],FILTER_SANITIZE_STRING);
@@ -156,7 +156,7 @@ $app->put('/purchase/{id}', function (Request $request, Response $response) {
      $purchase->quantity_confirmed  = filter_var($data['quantity_confirmed'],FILTER_SANITIZE_STRING);
      $purchase->product_Id_confirmed  = filter_var($data['product_Id_confirmed'],FILTER_SANITIZE_STRING);   
      $purchase->clearance_amount  = filter_var($data['clearance_amount'],FILTER_SANITIZE_STRING);
-     $purchase->clearnace_bank  = filter_var($data['clearnace_bank'],FILTER_SANITIZE_STRING);
+     $purchase->clearance_bank  = filter_var($data['clearance_bank'],FILTER_SANITIZE_STRING);
      $purchase->product_cleared  = filter_var($data['product_cleared'],FILTER_SANITIZE_STRING);
      $purchase->price_per_litre  = filter_var($data['price_per_litre'],FILTER_SANITIZE_STRING);
      $purchase->purchase_date  = filter_var($data['purchase_date'],FILTER_SANITIZE_STRING);
@@ -168,6 +168,45 @@ $app->put('/purchase/{id}', function (Request $request, Response $response) {
     }
     echo json_encode($response);
 });
+
+$app->put('/purchase/loading/{id}', function (Request $request, Response $response) {
+    try {
+      $data = $request->getParsedBody();
+     $id = $request->getAttribute('id');  
+     $purchase = \Bluenergi\Purchase::find($id);
+   
+     $purchase->ticket_no  = filter_var($data['ticket_no'],FILTER_SANITIZE_STRING);
+     $purchase->depot  = filter_var($data['depot'],FILTER_SANITIZE_STRING);
+     $purchase->quantity_confirmed  = filter_var($data['quantity_confirmed'],FILTER_SANITIZE_STRING);
+     $purchase->product_Id_confirmed  = filter_var($data['product_Id_confirmed'],FILTER_SANITIZE_STRING);   
+     
+     $response = $purchase->save();
+        
+    } catch (Exception $exc) {
+       $response = $exc->getMessage();
+    }
+    echo json_encode($response);
+});
+
+$app->put('/purchase/clearance/{id}', function (Request $request, Response $response) {
+    try {
+      $data = $request->getParsedBody();
+     $id = $request->getAttribute('id');  
+     $purchase = \Bluenergi\Purchase::find($id);
+   
+     $purchase->clearance_amount  = filter_var($data['clearance_amount'],FILTER_SANITIZE_STRING);
+     $purchase->clearance_bank  = filter_var($data['clearance_bank'],FILTER_SANITIZE_STRING);
+     $purchase->product_cleared  = filter_var($data['product_cleared'],FILTER_SANITIZE_STRING);
+     
+     $response = $purchase->save();
+        
+    } catch (Exception $exc) {
+       $response = $exc->getMessage();
+    }
+    echo json_encode($response);
+});
+
+
 
 $app->delete('/purchase/{id}', function (Request $request, Response $response) {
     try {

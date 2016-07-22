@@ -1,0 +1,45 @@
+<div class="container">
+<form class="col s12" autocomplete="off">
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="truck_number" ng-model="purchase.purchase_id" type="number" class="validate">
+          <label for="truck_number">Purchase Id</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="ticket_no" ng-model="purchase.ticket_no" type="text" class="validate">
+          <label for="ticket_no">Ticket Number</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="depot" ng-model="purchase.depot" type="text" class="validate">
+          <label for="depot">Depot</label>
+        </div>
+      </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input  id="quantity_confirmed" ng-model="purchase.quantity_confirmed" type="number" class="validate">
+          <label for="quantity_confirmed">Quantity</label>
+        </div>
+      </div>
+    <div class="row">
+      <div class="input-field col s12">
+    <select id="product_Id_confirmed" ng-model="purchase.product_Id_confirmed">
+      
+        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+       
+    </select>
+    <label for="product_Id_confirmed">Product</label>
+  </div>
+    </div>   
+            
+    <br><br>
+ 
+        <div>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="addPurchase(purchase)" ng-disabled="isPreloading"><i class="left material-icons">send </i>Add Purchase</a>
+        </div>
+    </form>
+    
+</div>

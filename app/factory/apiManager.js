@@ -73,11 +73,31 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
                 data: _purchase
             });
         };
+        api.addPurchaseLoading = function(_purchase){
+            return $http({
+                method: 'PUT',
+                url: apiUrl + "purchase/loading/" + _purchase.purchase_id,
+                data: _purchase
+            });
+        };
+        api.addPurchaseClearance = function(_purchase){
+            return $http({
+                method: 'PUT',
+                url: apiUrl + "purchase/clearance/" + _purchase.purchase_id,
+                data: _purchase
+            });
+        };
         
          api.getPurchase = function(_id){
             return $http({
                 method: 'GET',
                 url: apiUrl + "purchase/" + _id 
+            });
+        }; 
+        api.getPurchases = function(){
+            return $http({
+                method: 'GET',
+                url: apiUrl + "purchase" 
             });
         }; 
         api.updatePurchase = function(_purchase){
