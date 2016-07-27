@@ -8,7 +8,9 @@
     ],
     "require": {
         "slim/slim": "^3.4",
-        "illuminate/database": "^5.2"
+        "illuminate/database": "^5.2",
+        "tuupola/slim-jwt-auth": "^2.3",
+        "vlucas/phpdotenv": "^2.3"
     }
     ,
     "autoload":{

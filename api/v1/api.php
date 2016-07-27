@@ -5,9 +5,19 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../../vendor/autoload.php';
 require '../../database.php';
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
 $app = new \Slim\App;
+
+$app->add(new \Slim\Middleware\JwtAuthentication([
+    "path"=>'/',
+    "secret" => getenv("JWT_SECRET"),
+    "passthrough" => ["/users", "/admin/ping"],
+]));
 $app->get('/users/{id}', function (Request $request, Response $response) {
     try{
+      
      $id = $request->getAttribute('id');
      $response = Bluenergi\Users::find($id);
      
