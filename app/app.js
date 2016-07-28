@@ -97,7 +97,8 @@ var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
                            
                  }])
                      .run(['$rootScope', '$location', '$state', 'GenOps',function($rootScope, $location, $state, GenOps) {
-                         $rootScope.$on( '$stateChangeStart', function(e, toState  , toParams
+                         $rootScope.$on( '$stateChangeStart', ["e","toState"  ,"toParams"
+                                                   ,"fromState","fromParams",function(e, toState  , toParams
                                                    , fromState, fromParams) {
 
         var isLogin = toState.name === "login";
@@ -113,7 +114,7 @@ var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
             e.preventDefault(); // stop current execution
             $state.go('login'); // go to login
         }
-    }); 
+    }]); 
                      }]);
                  
                  

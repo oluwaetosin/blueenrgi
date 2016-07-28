@@ -1,4 +1,4 @@
-app.controller('loginSignupCtrl',['$scope','ApiManager','GenOps',function($scope,ApiManager,GenOps){
+app.controller('loginSignupCtrl',['$scope','ApiManager','GenOps','$state',function($scope,ApiManager,GenOps,$state){
    $scope.$parent.isLoginPage = true;
    
    $scope.login = function (_user){
@@ -13,6 +13,7 @@ app.controller('loginSignupCtrl',['$scope','ApiManager','GenOps',function($scope
                    if(data.status){
                      var dataDecoded = JSON.parse(atob(data.data));
                      GenOps.setToken(dataDecoded.token);
+                     $state.go("dispatch.new");
                    }
                   else{
                       alert (data.data);
