@@ -13,7 +13,8 @@ $app = new \Slim\App;
 $app->add(new \Slim\Middleware\JwtAuthentication([
     "path"=>'/',
     "secret" => getenv("JWT_SECRET"),
-    "passthrough" => ["/users", "/admin/ping"],
+    "passthrough" => ["/login","/users"],
+    "algorithm" => ["HS256", "HS384"]
 ]));
 $app->get('/users/{id}', function (Request $request, Response $response) {
     try{
@@ -38,7 +39,7 @@ $app->get('/users', function (Request $request, Response $response) {
 $app->post('/users', function (Request $request, Response $response) {
     try {
       $data = $request->getParsedBody();
-   //var_dump($data);
+  
      
      $user = new \Bluenergi\Users();
    
@@ -46,7 +47,7 @@ $app->post('/users', function (Request $request, Response $response) {
      $user->lastname  = filter_var($data['lastname'],FILTER_SANITIZE_STRING);
      $user->email  = filter_var($data['email'],FILTER_SANITIZE_STRING);
      $user->phonenumber  = filter_var($data['phonenumber'],FILTER_SANITIZE_STRING);
-     $user->password  = md5(filter_var($data['password'],FILTER_SANITIZE_STRING));
+     $user->password  = md5(getenv("PASSWORD_SALT").filter_var($data['password'],FILTER_SANITIZE_STRING));
      $user->lastseen  = filter_var($data['lastseen'],FILTER_SANITIZE_STRING);
      $user->level  = filter_var($data['level'],FILTER_SANITIZE_STRING);
     
@@ -57,19 +58,19 @@ $app->post('/users', function (Request $request, Response $response) {
     }
     echo json_encode($response);
 });
-$app->put('/user/{id}', function (Request $request, Response $response) {
+$app->put('/users/{id}', function (Request $request, Response $response) {
     try {
        $id = $request->getAttribute('id');
+       
        $data = $request->getParsedBody();
-      
-     
+       
      $user =  \Bluenergi\Users::find($id);
    
      $user->firstname  = filter_var($data['firstname'],FILTER_SANITIZE_STRING);
      $user->lastname  = filter_var($data['lastname'],FILTER_SANITIZE_STRING);
      $user->email  = filter_var($data['email'],FILTER_SANITIZE_STRING);
      $user->phonenumber  = filter_var($data['phonenumber'],FILTER_SANITIZE_STRING);
-     $user->password  = md5(filter_var($data['password'],FILTER_SANITIZE_STRING));
+     $user->password  = md5(getenv("PASSWORD_SALT").filter_var($data['password'],FILTER_SANITIZE_STRING));
      $user->lastseen  = filter_var($data['lastseen'],FILTER_SANITIZE_STRING);
      $user->level  = filter_var($data['level'],FILTER_SANITIZE_STRING);
     
@@ -386,6 +387,7 @@ $app->post('/dispatch', function (Request $request, Response $response) {
     echo json_encode($response);
 });
 $app->delete('/dispatch/{id}', function (Request $request, Response $response) {
+   
     try {
      
        $id = $request->getAttribute('id');  
@@ -396,6 +398,39 @@ $app->delete('/dispatch/{id}', function (Request $request, Response $response) {
         $response =  $exc->getMessage();
     }
     echo json_encode($response);
+});
+$app->post('/login', function (Request $request, Response $response) {
+     $returnValue = NULL;
+    try {
+    
+      $data = $request->getParsedBody();
+       if(!isset($data['email']) || !($data['email'])){
+           throw new Exception("Email required");
+       }
+       if(!isset($data['password']) || !($data['password'])){
+           throw new Exception("Password required");
+       }
+       $email = filter_var($data['email'],FILTER_SANITIZE_STRING);
+       $password = filter_var($data['password'],FILTER_SANITIZE_STRING);
+       
+       $password= md5(getenv("PASSWORD_SALT").$password);
+       $user = \Bluenergi\Users::where('email',$email)->get();
+      if(count($user) == 0){
+         if(!$email){
+           throw new Exception("Email does not exist");
+       } 
+      }
+      $user = \Bluenergi\Users::where([['email','=',$email],['password','=',$password]])->get(['email','id','firstname','lastname']);
+      if(count($user) == 0){
+          throw new Exception("Incorrect Password/User Combination");
+      } 
+       
+    } catch (Exception $exc) {
+       return $response = $response->withJson(array('status'=>0,'data'=>$exc->getMessage()),500);
+       
+    }
+    $jwt = Firebase\JWT\JWT::encode($user[0],getenv("JWT_SECRET"),'HS256');
+     return $response->withJson(array('status'=>1,'data'=>  base64_encode(json_encode(['token'=> $jwt,'user'=>$user[0]]))));
 });
 $app->run();
 

@@ -3,19 +3,19 @@
             <form class="col s12" autocomplete="off">
       <div class="row">
         <div class="input-field col s12">
-          <input  id="email" type="email" class="validate">
-          <label for="first_name">First Name</label>
+            <input  id="email" ng-model="user.email" type="email" class="validate">
+          <label for="email">Email</label>
         </div>
       </div>
       
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
+            <input id="password" ng-model="user.password" type="password" class="validate">
           <label for="password">Password</label>
         </div>
       </div>
         <div>
-            <a class="waves-effect waves-light btn btn-block login-button"><i class="material-icons left">vpn_key</i>Login</a>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="login(user)"><i class="material-icons left">vpn_key</i>Login</a>
         </div>
         <div>
             <p class="text-white center-align signup-question"> No Accoutn Yet? Create one</p>

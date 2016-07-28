@@ -1,6 +1,8 @@
-app.factory('GenOps',[function(){
+app.factory('GenOps',['$window',function($window){
     
         var genOps = {};
+        var storage = $window.localStorage;
+        var key = "bluenergi-auth-token";
         var activeProduct = null;
          var activeUser = null;
          var activePurchase = null;
@@ -29,6 +31,18 @@ app.factory('GenOps',[function(){
            genOps.getActiveDispatch = function(){
                return activeDispatch;
            };
+           genOps.getToken = function(){
+                                   return storage.getItem(key);
+                                  };
+           genOps.setToken = function (token){
+                           if(token){
+                               storage.setItem(key,token);
+                           }else{
+                               storage.removeItem(key);
+                           }
+                        };
+                        
+            
        return genOps;
             
 }]);

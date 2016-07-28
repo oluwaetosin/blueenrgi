@@ -50,7 +50,7 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
         api.updateUser = function(_user){
             return $http({
                 method: 'PUT',
-                url: apiUrl + "user/" + _user.id,
+                url: apiUrl + "users/" + _user.id,
                 data : _user
             });
         }; 
@@ -145,6 +145,13 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
             return $http({
                 method: 'DELETE',
                 url: apiUrl + "dispatch/" +_id 
+            });
+        };
+        api.login = function(_user){
+            return $http({
+                method: 'POST',
+                url: apiUrl + "login",
+                data: _user
             });
         };
         

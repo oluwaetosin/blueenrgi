@@ -1,6 +1,7 @@
 var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
-                 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider){
-                   $urlRouterProvider.otherwise("/login");
+                 .config(['$stateProvider','$urlRouterProvider','$httpProvider',function($stateProvider, $urlRouterProvider,$httpProvider){
+                  $httpProvider.interceptors.push('AuthInterceptor'); 
+                  $urlRouterProvider.otherwise("/login");
                     
                    $stateProvider.
                            state('login',{
