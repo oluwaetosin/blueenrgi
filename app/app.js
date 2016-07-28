@@ -2,7 +2,9 @@ var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
                  .config(['$stateProvider','$urlRouterProvider','$httpProvider',function($stateProvider, $urlRouterProvider,$httpProvider){
                   $httpProvider.interceptors.push('AuthInterceptor'); 
                   $urlRouterProvider.otherwise("/login");
-                    
+                  
+               
+               
                    $stateProvider.
                            state('login',{
                                url: '/login',
@@ -93,7 +95,26 @@ var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
                                controller: 'editDispatchCtrl'
                            });
                            
-                 }]);
+                 }])
+                     .run(['$rootScope', '$location', '$state', 'GenOps',function($rootScope, $location, $state, GenOps) {
+                         $rootScope.$on( '$stateChangeStart', function(e, toState  , toParams
+                                                   , fromState, fromParams) {
+
+        var isLogin = toState.name === "login";
+        if(isLogin){
+           return; // no need to redirect 
+        }
+
+        // now, redirect only not authenticated
+
+        var userInfo = GenOps.getToken();
+
+        if(!userInfo) {
+            e.preventDefault(); // stop current execution
+            $state.go('login'); // go to login
+        }
+    }); 
+                     }]);
                  
                  
 

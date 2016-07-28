@@ -420,7 +420,7 @@ $app->post('/login', function (Request $request, Response $response) {
            throw new Exception("Email does not exist");
        } 
       }
-      $user = \Bluenergi\Users::where([['email','=',$email],['password','=',$password]])->get(['email','id','firstname','lastname']);
+      $user = \Bluenergi\Users::where([['email','=',$email],['password','=',$password]])->get(['email','id','firstname','lastname','level']);
       if(count($user) == 0){
           throw new Exception("Incorrect Password/User Combination");
       } 
