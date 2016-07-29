@@ -35,6 +35,7 @@ app.controller('editUserCtrl',['$scope','ApiManager','GenOps','$stateParams','my
     };  
     $timeout(function(){
           $('select').material_select();
+          $('.button-collapse').sideNav('hide');
     },3000);
 }]);
 

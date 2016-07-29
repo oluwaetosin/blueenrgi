@@ -20,6 +20,6 @@ app.controller('newProductCtrl',['$scope','ApiManager',function($scope,ApiManage
                $scope.$parent.$parent.isPreloading = false;
               });
     };  
-    
+    $('.button-collapse').sideNav('hide');
 }]);
 

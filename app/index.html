@@ -21,23 +21,10 @@
         <a href="#" class="brand-logo">{{currentState}}</a>
         
       <ul class="right hide-on-med-and-down">
-        <li><a href="sass.html">Home</a></li>
-        <li><a href="sass.html">Product</a></li>
-        <li><a href="badges.html">Purchase</a></li>
-        <li><a href="purchase.payment">Purchase Payment</a></li>
-        <li><a href="purchase.loading">Purchase Loading</a></li>
-        <li><a href="collapsible.html">Dispatch</a></li>
-         <li><a href="collapsible.html">Users</a></li>
+        <div ng-include="'partials/nav.html'"></div>
       </ul>
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="sass.html">Home</a></li>
-        <li><a ui-sref="products.list">Product</a></li>
-        <li><a ui-sref="purchase.list">Purchase</a></li>
-        <li><a ui-sref="purchase.payment">Purchase Payment</a></li>
-        <li><a ui-sref="purchase.loading">Purchase Loading</a></li>
-         <li><a ui-sref="purchase.clearance">Purchase Clearance</a></li>
-        <li><a ui-sref="dispatch.list">Dispatch</a></li>
-         <li><a ui-sref="users.list">Users</a></li>
+          <div ng-include="'partials/nav.html'"></div>
       </ul>
      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         
@@ -78,6 +65,7 @@
   <script src="../node_modules/angular-animate/angular-animate.min.js"></script>
   <script src="../node_modules/angular-material/angular-material.js"></script>
   <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="../node_modules/jwt-decode/build/jwt-decode.min.js"></script>
   
 
   <script src="app.js"></script>

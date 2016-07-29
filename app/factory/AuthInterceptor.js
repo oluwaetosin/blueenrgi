@@ -1,4 +1,4 @@
-app.factory('AuthInterceptor',function(GenOps){
+app.factory('AuthInterceptor',function(GenOps,$q,$window,myConfig){
                     
                     
                             var request = {};
@@ -10,6 +10,12 @@ app.factory('AuthInterceptor',function(GenOps){
                             }
                             return config;
                         };
+                        request.responseError = function(response) {
+        if (response.status == 401){
+            window.location = myConfig.appDirectory+"/#/login";
+        }
+        return $q.reject(response);
+    };
                
                         return request;
                          

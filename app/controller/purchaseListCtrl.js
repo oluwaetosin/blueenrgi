@@ -42,6 +42,6 @@ app.controller('purchaseListCtrl',['$scope','ApiManager','GenOps','$state',funct
                  alert("Error Occured");
              });
    };
-            
+    $('.button-collapse').sideNav('hide');        
 }]);
 

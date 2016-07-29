@@ -1,5 +1,5 @@
 app.controller('newDispatchCtrl',['$scope','ApiManager','GenOps','$stateParams','$timeout',function($scope,ApiManager,GenOps,$stateParams,$timeout){
-    
+     $scope.$parent.$parent.isPreloading = false; 
    $scope.$parent.$parent.isLoginPage = false;   
    $scope.$parent.currentState = 'Add Dispatch';
    $scope.products = [];
@@ -40,6 +40,6 @@ app.controller('newDispatchCtrl',['$scope','ApiManager','GenOps','$stateParams',
      $timeout(function(){
           $('select').material_select();
     },1000);
-           
+   $('.button-collapse').sideNav('hide');        
 }]);
 

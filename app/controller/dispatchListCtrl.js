@@ -42,6 +42,6 @@ app.controller('dispatchListCtrl',['$scope','ApiManager','GenOps','$state',funct
                  alert("Error Occured");
              });
    };
-            
+    $('.button-collapse').sideNav('hide');         
 }]);
 

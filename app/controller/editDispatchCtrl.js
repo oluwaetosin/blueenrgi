@@ -44,6 +44,7 @@ app.controller('editDispatchCtrl',['$scope','ApiManager','GenOps','$stateParams'
                   alert("Failure");
                $scope.$parent.$parent.isPreloading = false;
               });
-    };        
+    };
+     $('.button-collapse').sideNav('hide');
 }]);
 

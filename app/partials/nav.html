@@ -1,0 +1,8 @@
+ <li ng-if="parentUser && parentUser.level == 1"><a ui-sref="products.list">Product</a></li>
+        <li  ng-if="parentUser"><a ui-sref="purchase.list" ng-if="parentUser && parentUser.level == 1">Purchase</a></li>
+        <li ng-if="parentUser"><a ui-sref="purchase.payment" ng-if="parentUser && parentUser.level == 1">Purchase Payment</a></li>
+        <li ng-if="parentUser"><a ui-sref="purchase.loading">Purchase Loading</a></li>
+         <li ng-if="parentUser"><a ui-sref="purchase.clearance">Purchase Clearance</a></li>
+        <li ng-if="parentUser && parentUser.level == 1"><a ui-sref="dispatch.list">Dispatch</a></li>
+         <li ng-if="parentUser && parentUser.level == 1"><a ui-sref="users.list">Users</a></li>
+         <li ng-if="parentUser"><a ng-click="$parent.logout()">Logout</a></li

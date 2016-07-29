@@ -42,6 +42,6 @@ app.controller('usersListCtrl',['$scope','ApiManager','GenOps','$state',function
                  alert("Error Occured");
              });
    };
-            
+   $('.button-collapse').sideNav('hide');         
 }]);
 

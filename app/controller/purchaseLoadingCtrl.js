@@ -32,6 +32,7 @@ app.controller('purchaseLoadingCtrl',['$scope','ApiManager','GenOps','$statePara
      
      $timeout(function(){
           $('select').material_select();
+          $('.button-collapse').sideNav('hide');
     },1000);
            
 }]);

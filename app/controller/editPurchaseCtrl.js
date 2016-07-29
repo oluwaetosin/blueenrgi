@@ -50,6 +50,7 @@ app.controller('editPurchaseCtrl',['$scope','ApiManager','GenOps','$stateParams'
     };  
     $timeout(function(){
           $('select').material_select();
+          $('.button-collapse').sideNav('hide');
     },3000);
 }]);
 
