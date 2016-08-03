@@ -13,7 +13,7 @@ $app = new \Slim\App;
 $app->add(new \Slim\Middleware\JwtAuthentication([
     "path"=>'/',
     "secret" => getenv("JWT_SECRET"),
-    "passthrough" => ["/login","/users"],
+    "passthrough" => ["/login","/signup"],
     "algorithm" => ["HS256", "HS384"]
 ]));
 $app->get('/users/{id}', function (Request $request, Response $response) {
@@ -431,6 +431,60 @@ $app->post('/login', function (Request $request, Response $response) {
     }
     $jwt = Firebase\JWT\JWT::encode($user[0],getenv("JWT_SECRET"),'HS256');
      return $response->withJson(array('status'=>1,'data'=>  base64_encode(json_encode(['token'=> $jwt,'user'=>$user[0]]))));
+});
+
+$app->post('/signup', function (Request $request, Response $response) {
+     $returnValue = NULL;
+    try {
+    
+      $data = $request->getParsedBody();
+       if(!isset($data['email']) || !($data['email'])){
+           throw new Exception("Email required");
+       }
+       if(!isset($data['firstname']) || !($data['firstname'])){
+           throw new Exception("Firstname required");
+       }
+       if(!isset($data['lastname']) || !($data['lastname'])){
+           throw new Exception("Lastname required");
+       }
+       if(!isset($data['phonenumber']) || !($data['phonenumber'])){
+           throw new Exception("Phone Number required");
+       }
+       if(!isset($data['password']) || !($data['password'])){
+           throw new Exception("Password required");
+       }
+       $email = filter_var($data['email'],FILTER_SANITIZE_STRING);
+       $password = filter_var($data['password'],FILTER_SANITIZE_STRING);
+       $firstname = filter_var($data['firstname'],FILTER_SANITIZE_STRING);
+       $lastname = filter_var($data['lastname'],FILTER_SANITIZE_STRING);
+       $phonenumber = filter_var($data['phonenumber'],FILTER_SANITIZE_STRING);
+       
+       $password= md5(getenv("PASSWORD_SALT").$password);
+       $founduser = \Bluenergi\Users::where('email',$email)->get();
+      if(count($founduser)){
+         
+           throw new Exception("Email already exist");
+      
+      };
+      $user = new Bluenergi\Users();
+      $user->email =  $email;
+      $user->password = $password;
+      $user->firstname = $firstname;
+      $user->lastname = $lastname;
+      $user->phonenumber = $phonenumber;
+       $user->level = 1;
+       $result = $user->save();
+       if($result){
+           $returnValue = array('status'=>1,'data'=>'Registeration Successful');
+       }else{
+             $returnValue = array('status'=>0,'data'=>'Error Occured while registering');
+       }
+    } catch (Exception $exc) {
+       return $response = $response->withJson(array('status'=>0,'data'=>$exc->getMessage()),500);
+       
+    }
+    
+     return $response->withJson($returnValue);
 });
 $app->run();
 

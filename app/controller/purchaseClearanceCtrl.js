@@ -19,13 +19,13 @@ app.controller('purchaseClearanceCtrl',['$scope','ApiManager','GenOps','$statePa
      ApiManager.addPurchaseClearance(_purchase)
               .success(function(data){
                 if(data){
-                    alert("Success");
+                  GenOps.toast("Item successfully added");
             $scope.purchase = [];
             $scope.$parent.$parent.isPreloading = false; 
                 }
               })
               .error(function(data){
-                  alert("Failure");
+                 GenOps.toast("Error occurred, item not added");
                $scope.$parent.$parent.isPreloading = false;
               });
           };

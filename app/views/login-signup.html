@@ -1,5 +1,6 @@
-    <div class="row login-container">
+    <div class="row login-container hide-on-med-and-up">
             <h3 class="logo text-lighten-1">bluEnergi</h3>
+            <div ng-if="showLogin">
             <form class="col s12" autocomplete="off">
       <div class="row">
         <div class="input-field col s12">
@@ -18,7 +19,131 @@
             <a class="waves-effect waves-light btn btn-block login-button" ng-click="login(user)"><i class="material-icons left">vpn_key</i>Login</a>
         </div>
         <div>
-            <p class="text-white center-align signup-question"> No Accoutn Yet? Create one</p>
+            <p class="text-white center-align signup-question" ng-click="activateSignup()"> No Accoutn Yet? Create one</p>
         </div>
     </form>
+        </div>
+            <div ng-if="showSignup">
+                    <form class="col s12" autocomplete="off">
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="firstname" ng-model="newUser.firstname" type="text" class="validate">
+          <label for="firstname">Firstname</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="lastname" ng-model="newUser.lastname" type="text" class="validate">
+          <label for="lastname">Lastname</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="phonenumber" ng-model="newUser.phonenumber" type="text" class="validate">
+          <label for="phonenumber">Phone Number</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="email" ng-model="newUser.email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s12">
+            <input id="password" ng-model="newUser.password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+        <div class="row">
+        <div class="input-field col s12">
+            <input id="password" ng-model="newUser.passwordagain" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+        <div>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="signup(newUser)"><i class="material-icons left">vpn_key</i>Signup</a>
+        </div>
+        <div>
+            <p class="text-white center-align signup-question" ng-click="activateLogin()">Login</p>
+        </div>
+    </form>
+            </div>
+    
+  </div>
+
+<div class="row login-container hide-on-small-only">
+            <h3 class="logo text-lighten-1">bluEnergi</h3>
+            <div ng-if="showLogin">
+            <form class="col s6 offset-s3" autocomplete="off">
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="email" ng-model="user.email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s12">
+            <input id="password" ng-model="user.password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+        <div>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="login(user)"><i class="material-icons left">vpn_key</i>Login</a>
+        </div>
+        <div>
+            <p class="text-white center-align signup-question" ng-click="activateSignup()"> No Accoutn Yet? Create one</p>
+        </div>
+    </form>
+        </div>
+            <div ng-if="showSignup">
+                    <form class="col s12" autocomplete="off">
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="firstname" ng-model="newUser.firstname" type="text" class="validate">
+          <label for="firstname">Firstname</label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field col s12">
+            <input  id="lastname" ng-model="newUser.lastname" type="text" class="validate">
+          <label for="lastname">Lastname</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="phonenumber" ng-model="newUser.phonenumber" type="text" class="validate">
+          <label for="phonenumber">Phone Number</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <input  id="email" ng-model="newUser.email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s12">
+            <input id="password" ng-model="newUser.password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+        <div class="row">
+        <div class="input-field col s12">
+            <input id="password" ng-model="newUser.passwordagain" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+        <div>
+            <a class="waves-effect waves-light btn btn-block login-button" ng-click="signup(newUser)"><i class="material-icons left">vpn_key</i>Signup</a>
+        </div>
+        <div>
+            <p class="text-white center-align signup-question" ng-click="activateLogin()">Login</p>
+        </div>
+    </form>
+            </div>
+    
   </div>

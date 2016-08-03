@@ -1,4 +1,4 @@
-app.controller('newProductCtrl',['$scope','ApiManager',function($scope,ApiManager){
+app.controller('newProductCtrl',['$scope','ApiManager','GenOps',function($scope,ApiManager,GenOps){
    $scope.newProduct = {};
    $scope.addProduct = function(_name,_description){
       if(!_name || !_description){
@@ -9,14 +9,14 @@ app.controller('newProductCtrl',['$scope','ApiManager',function($scope,ApiManage
       ApiManager.addProduct(product)
               .success(function(data){
                 if(data){
-                    alert("Success");
+                   GenOps.toast("Item successfully added");
             $scope.name = "";
             $scope.description = "";
             $scope.$parent.$parent.isPreloading = false; 
                 }
               })
               .error(function(data){
-                  alert("Failure");
+                GenOps.toast("Error occurred");
                $scope.$parent.$parent.isPreloading = false;
               });
     };  

@@ -1,4 +1,5 @@
-<table ng-if="dispatch.length != 0">
+<div class="container">
+<table ng-if="dispatch.length != 0" class="responsive-table centered striped hide-on-small-only">
         <thead>
           <tr>
               <th data-field="id">Purchase Id</th>
@@ -34,6 +35,60 @@
            
         </tbody>
       </table>
+    <div ng-if="dispatch.length != 0" class="hide-on-med-and-up">
+<!--        <thead>
+          <tr>
+              <th data-field="id">Purchase Id</th>
+              <th data-field="name">Customer Id</th>
+              <th data-field="price">Sold Quantity</th>
+              <th data-field="id">Storage Balance</th>
+              <th data-field="name">Sold Rate</th>
+              <th data-field="price">Outstanding</th>
+              <th data-field="price">Payment Due Date</th>
+              <th data-field="price">Actual Payment Date</th>
+              <th data-field="price">Amount Paid</th>
+              <th data-field="price">Comment</th>
+              <th data-field="price">Edit</th>
+              <th data-field="price">Delete</th>
+          </tr>
+        </thead>-->
+<div class="row" ng-repeat="currentDispatch in dispatch">
+        <div class="col s12 m6">
+          <div class="card sticky-action">
+               <div class="card-title activator">
+                   <div><i class="material-icons right">more_vert</i></div></div>
+            <div class="card-content">
+              <ul class="collection">
+
+<li class="collection-item avatar">
+      <i class="material-icons circle">account_circle</i>
+      <span class="title">{{currentDispatch.firstname}} {{currentDispatch.lastname}}</span>
+      <p><a href="" class="collection-item">Sold Quantity<span class="badge">{{currentDispatch.sold_qty}}</span></a> <br>
+         <a href="" class="collection-item">Sold Rate<span class="new badge">{{currentDispatch.sold_rate}}</span></a>
+      </p>
+    </li>
+              </ul></div>
+              <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">&nbsp;<i class="material-icons right">close</i></span>
+                    <div class="collection">
+                        <a href="" class="collection-item">Customer<span class="badge">{{currentDispatch.firstname}} {{currentDispatch.lastname}}</span></a> 
+                        <a href="" class="collection-item">Sold Rate<span class="badge">{{currentDispatch.sold_rate}}</span></a>
+                <a href="" class="collection-item">Storage Balance <span class="badge">{{currentDispatch.storage_balance}}</span></a>
+                <a href="" class="collection-item">Outstanding<span class="badge">{{currentDispatch.outstanding}}</span></a>
+                <a href="" class="collection-item">Payment Due Date<span class="badge">{{currentDispatch.payment_due_date}}</span></a>
+                <a href="" class="collection-item">Actual Payment Date<span class="badge">{{currentDispatch.actual_payment_date}}</span></a>
+                <a href="" class="collection-item">Amount Paid<span class="badge">{{currentDispatch.amount_paid}}</span></a>
+                    </div>
+            </div>
+            <div class="card-action">
+              <a href="" class="waves-effect waves-light" ng-click="edit(currentDispatch)"><i class="material-icons right">mode_edit</i></a>
+               <td> <a href="" class="waves-effect waves-light" ng-click="delete(currentDispatch)"><i class="material-icons right">delete</i></a></td>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        
 <div ng-if="dispatch.length == 0">
     <div class="card-panel teal blue lighten-3"><span class='center-align'>Record is Empty</span></div>
             
@@ -54,3 +109,4 @@
       <i class="large material-icons">add</i>
     </a>
   </div>
+</div>

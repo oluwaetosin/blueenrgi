@@ -42,7 +42,10 @@ app.factory('GenOps',['$window',function($window){
                            }
                         };
                         
-            
+          genOps.toast = function (message){
+                var $toastContent = $('<span>'+message+'</span>');
+                 $window.Materialize.toast($toastContent, 5000);  
+          }; 
        return genOps;
             
 }]);

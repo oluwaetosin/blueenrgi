@@ -28,11 +28,11 @@ app.controller('productCtrl',['$scope','ApiManager','GenOps','$state',function($
    $scope.confirmDelete = function(_id){
      ApiManager.deleteProduct(_id)
              .success(function(data){
-                 alert("Success"); 
+                GenOps.toast("Item successfully deleted");
                   $('#modal1').closeModal();
              })
              .error(function(data){
-                 alert("Error Occured");
+                  GenOps.toast("Error occurred, Item not deleted");
              });
    };
     $('.button-collapse').sideNav('hide');        

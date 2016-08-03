@@ -28,7 +28,7 @@ app.controller('usersListCtrl',['$scope','ApiManager','GenOps','$state',function
    $scope.confirmDelete = function(_id){
      ApiManager.deleteUser(_id)
              .success(function(data){
-                 alert("Success"); 
+                 GenOps.toast("Item successfully deleted");
                   $('#modal1').closeModal();
                    var index = _.findIndex($scope.users,function(_user){
                       return _user.id = _id;
@@ -39,7 +39,7 @@ app.controller('usersListCtrl',['$scope','ApiManager','GenOps','$state',function
                   $scope.users.splice(index,1);
              })
              .error(function(data){
-                 alert("Error Occured");
+                 GenOps.toast("Error occurred");
              });
    };
    $('.button-collapse').sideNav('hide');         

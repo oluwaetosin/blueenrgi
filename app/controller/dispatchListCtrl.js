@@ -26,9 +26,11 @@ app.controller('dispatchListCtrl',['$scope','ApiManager','GenOps','$state',funct
    };
    
    $scope.confirmDelete = function(_id){
+       $scope.$parent.$parent.isPreloading = true;
      ApiManager.deleteDispatch(_id)
              .success(function(data){
-                 alert("Success"); 
+                 GenOps.toast("Item was successfully deleted");
+                
                   $('#modal1').closeModal();
                    var index = _.findIndex($scope.dispatch,function(_dispatch){
                       return _dispatch.id = _id;
@@ -37,9 +39,11 @@ app.controller('dispatchListCtrl',['$scope','ApiManager','GenOps','$state',funct
                       return;
                   }
                   $scope.dispatch.splice(index,1);
+                  $scope.$parent.$parent.isPreloading = false;
              })
              .error(function(data){
-                 alert("Error Occured");
+                 
+         GenOps.toast("Error Occured while deletign Item");
              });
    };
     $('.button-collapse').sideNav('hide');         

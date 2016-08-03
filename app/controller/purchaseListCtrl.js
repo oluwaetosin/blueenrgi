@@ -28,7 +28,7 @@ app.controller('purchaseListCtrl',['$scope','ApiManager','GenOps','$state',funct
    $scope.confirmDelete = function(_id){
      ApiManager.deletePurchase(_id)
              .success(function(data){
-                 alert("Success"); 
+                  GenOps.toast("Item successfully deleted"); 
                   $('#modal1').closeModal();
                    var index = _.findIndex($scope.purchases,function(_purchase){
                       return _purchase.id = _id;
@@ -39,7 +39,7 @@ app.controller('purchaseListCtrl',['$scope','ApiManager','GenOps','$state',funct
                   $scope.users.splice(index,1);
              })
              .error(function(data){
-                 alert("Error Occured");
+                 GenOps.toast("Error occurred, item cannot be deleted");
              });
    };
     $('.button-collapse').sideNav('hide');        

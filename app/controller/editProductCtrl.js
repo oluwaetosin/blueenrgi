@@ -22,13 +22,14 @@ app.controller('editProductCtrl',['$scope','ApiManager','GenOps','$stateParams',
       ApiManager.updateProduct(_activeProduct)
               .success(function(data){
                 if(data){
-                    alert("Success");
+                  
+            GenOps.toast("Item successfully Updated",0);
             
             $scope.$parent.$parent.isPreloading = false; 
                 }
               })
               .error(function(data){
-                  alert("Failure");
+                  GenOps.toast("Error occurred while updating Item");
                $scope.$parent.$parent.isPreloading = false;
               });
     }; 

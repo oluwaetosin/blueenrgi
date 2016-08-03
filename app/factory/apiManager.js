@@ -154,6 +154,13 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
                 data: _user
             });
         };
+        api.signup = function(_user){
+            return $http({
+                method: 'POST',
+                url: apiUrl + "signup",
+                data: _user
+            });
+        };
         
        return api;
             

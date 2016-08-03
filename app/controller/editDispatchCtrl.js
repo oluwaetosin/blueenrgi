@@ -35,13 +35,13 @@ app.controller('editDispatchCtrl',['$scope','ApiManager','GenOps','$stateParams'
       ApiManager.updateProduct(_activeDispatch)
               .success(function(data){
                 if(data){
-                    alert("Success");
+                   GenOps.toast("Item Successfully Updated");
             
             $scope.$parent.$parent.isPreloading = false; 
                 }
               })
               .error(function(data){
-                  alert("Failure");
+                 GenOps.toast("Error occured while updating item");
                $scope.$parent.$parent.isPreloading = false;
               });
     };

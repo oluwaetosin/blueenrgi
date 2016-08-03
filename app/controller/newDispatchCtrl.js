@@ -26,13 +26,13 @@ app.controller('newDispatchCtrl',['$scope','ApiManager','GenOps','$stateParams',
      ApiManager.addDispatch(_dispatch)
               .success(function(data){
                 if(data){
-                    alert("Success");
+                  GenOps.toast("Action Successful");
             $scope.purchase = [];
             $scope.$parent.$parent.isPreloading = false; 
                 }
               })
               .error(function(data){
-                  alert("Failure");
+                  GenOps.toast("Error occurred");
                $scope.$parent.$parent.isPreloading = false;
               });
           };

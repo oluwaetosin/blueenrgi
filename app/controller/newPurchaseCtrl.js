@@ -24,13 +24,13 @@ app.controller('newPurchaseCtrl',['$scope','ApiManager','GenOps','$stateParams',
      ApiManager.addPurchase(_purchase)
               .success(function(data){
                 if(data){
-                    alert("Success");
+                  GenOps.toast("Item successfully added");
             $scope.purchase = [];
             $scope.$parent.$parent.isPreloading = false; 
                 }
               })
               .error(function(data){
-                  alert("Failure");
+                  GenOps.toast("Error occurred");
                $scope.$parent.$parent.isPreloading = false;
               });
           };
