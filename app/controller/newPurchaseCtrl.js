@@ -1,7 +1,8 @@
 app.controller('newPurchaseCtrl',['$scope','ApiManager','GenOps','$stateParams','$timeout',function($scope,ApiManager,GenOps,$stateParams,$timeout){
    $scope.$parent.$parent.isPreloading = true;
    $scope.$parent.$parent.isLoginPage = false;   
-   $scope.$parent.currentState = 'Purchase';
+   $scope.$parent.$parent.currentStateValue = 'purchase.new';
+   $scope.$parent.$parent.currentState = 'New Purchase';
    $scope.products = [];
     ApiManager.getProducts()
            .success(function(data){

@@ -2,15 +2,19 @@
 <table ng-if="dispatch.length != 0" class="responsive-table centered striped hide-on-small-only">
         <thead>
           <tr>
+               <th data-field="id">S/N</th>
               <th data-field="id">Purchase Id</th>
-              <th data-field="name">Customer Id</th>
+              <th data-field="name">Customer Name</th>
               <th data-field="price">Sold Quantity</th>
               <th data-field="id">Storage Balance</th>
               <th data-field="name">Sold Rate</th>
+              <th data-field="totalamount">Total amount</th>
               <th data-field="price">Outstanding</th>
               <th data-field="price">Payment Due Date</th>
               <th data-field="price">Actual Payment Date</th>
               <th data-field="price">Amount Paid</th>
+               <th data-field="price">Outstanding</th>
+               <th data-field="price">Profitability</th>
               <th data-field="price">Comment</th>
               <th data-field="price">Edit</th>
               <th data-field="price">Delete</th>
@@ -19,15 +23,20 @@
 
         <tbody>
             <tr ng-repeat="currentDispatch in dispatch">
+            <td>{{currentDispatch.id}}</td>
             <td>{{currentDispatch.purchase_Id}}</td>
             <td>{{currentDispatch.firstname}} {{currentDispatch.lastname}}</td>
              <td>{{currentDispatch.sold_qty}}</td>
              <td>{{currentDispatch.storage_balance}}</td>
              <td>{{currentDispatch.sold_rate}}</td>
+             <td>{{currentDispatch.sold_rate * currentDispatch.sold_qty | currency:"N":2}}</td>
              <td>{{currentDispatch.outstanding}}</td>
              <td>{{currentDispatch.payment_due_date}}</td>
              <td>{{currentDispatch.actual_payment_date}}</td>
-             <td>{{currentDispatch.amount_paid}}</td>
+              <td>{{currentDispatch.amount_paid}}</td>
+             <td>{{(currentDispatch.sold_rate * currentDispatch.sold_qty) - currentDispatch.amount_paid | currency:"N":2}}</td>
+              <td>{{(currentDispatch.sold_rate - currentDispatch.purchase_rate) * currentDispatch.sold_qty | currency:"N":2}}</td>
+            
               <td>{{currentDispatch.comment}}</td>
             <td> <a href="" class="waves-effect waves-light" ng-click="edit(currentDispatch)"><i class="material-icons right">mode_edit</i></a></td>
              <td> <a href="" class="waves-effect waves-light" ng-click="delete(currentDispatch)"><i class="material-icons right">delete</i></a></td>

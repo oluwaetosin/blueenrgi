@@ -1,7 +1,8 @@
 app.controller('loginSignupCtrl',['$scope','ApiManager','GenOps','$state','$window',function($scope,ApiManager,GenOps,$state,$window){
    $scope.showLogin = true;
    $scope.showSignup = false;
-  
+     $scope.$parent.currentState =    $scope.showSignup ? 'Signup' : 'Login';
+     $scope.$parent.currentStateValue = 'login';
    $scope.$parent.isLoginPage = true;
    $scope.$parent.isPreloading = false;
    $scope.activateLogin = function(){
@@ -80,7 +81,7 @@ app.controller('loginSignupCtrl',['$scope','ApiManager','GenOps','$state','$wind
             GenOps.toast("lastname is required",0);
             return;
        }
-        if(!_user.phoneneumber){
+        if(!_user.phonenumber){
           
             GenOps.toast("Phone Number is required is required",0);
             return;

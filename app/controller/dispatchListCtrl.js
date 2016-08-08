@@ -2,6 +2,7 @@ app.controller('dispatchListCtrl',['$scope','ApiManager','GenOps','$state',funct
    $scope.$parent.$parent.isPreloading = true;
    $scope.$parent.$parent.isLoginPage = false;   
    $scope.$parent.$parent.currentState = 'Dispatch';
+   $scope.$parent.$parent.currentStateValue = 'dispatch.list';
     ApiManager.getDispatches()
            .success(function(data){
                $scope.dispatch = data;

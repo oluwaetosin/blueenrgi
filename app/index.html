@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+  <title>Blu</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,7 +18,7 @@
     <nav role="navigation">
     <div class="nav-wrapper container">
         
-        <a href="#" class="brand-logo">{{currentState}}</a>
+        <a href="#" class="brand-logo"><span ng-hide="true">Loading...</span></a>
         
       <ul class="right hide-on-med-and-down">
         <div ng-include="'partials/nav.html'"></div>
@@ -50,8 +50,9 @@
         </div>
         
 
-         
+     <h5 class="center-align"><span class="hide state">{{currentState}}</span></h5>    
     </div>
+    
  <div ui-view></div>
 
 

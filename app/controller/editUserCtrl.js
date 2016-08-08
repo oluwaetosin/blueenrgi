@@ -2,6 +2,9 @@ app.controller('editUserCtrl',['$scope','ApiManager','GenOps','$stateParams','my
                        '$timeout',function($scope,ApiManager,GenOps,$stateParams,myConfig,$timeout){
    $scope.activeUser = GenOps.getActiveUser();
    $scope.levels = myConfig.levels;
+   $scope.$parent.$parent.isPreloading = true;
+   $scope.$parent.$parent.currentState = 'Edit User';
+   $scope.$parent.$parent.currentValue = 'users.edit';
    if(!$scope.activeUser){
      var id = $stateParams.id;
        $scope.$parent.$parent.isPreloading = true;

@@ -1,6 +1,15 @@
 var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
                  .config(['$stateProvider','$urlRouterProvider','$httpProvider',function($stateProvider, $urlRouterProvider,$httpProvider){
                   $httpProvider.interceptors.push('AuthInterceptor'); 
+                  
+                    $httpProvider.defaults.transformRequest = function(data){
+                        if (data === undefined) {
+                          return data;
+                        }
+                        return $.param(data);
+                      };
+                      $httpProvider.defaults.headers.post['Content-Type'] = ''
+                        + 'application/x-www-form-urlencoded; charset=UTF-8';
                   $urlRouterProvider.otherwise("/login");
                   
                

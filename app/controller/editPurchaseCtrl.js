@@ -8,6 +8,8 @@ app.controller('editPurchaseCtrl',['$scope','ApiManager','GenOps','$stateParams'
        _purchase.clearance_amount = parseFloat(_purchase.clearance_amount);
        return _purchase;
    }
+    $scope.$parent.$parent.currentStateValue = 'purchase.edit';
+    $scope.$parent.$parent.currentState = 'Edit Purchase';
    $scope.activePurchase = GenOps.getActivePurchase() ? sanitizePurchase(GenOps.getActivePurchase()) : null ;
    
    $scope.levels = myConfig.levels;

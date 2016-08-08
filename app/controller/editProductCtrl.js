@@ -1,6 +1,7 @@
 app.controller('editProductCtrl',['$scope','ApiManager','GenOps','$stateParams',function($scope,ApiManager,GenOps,$stateParams ){
    $scope.activeProduct = GenOps.getActiveProduct();
-   
+   $scope.$parent.$parent.currentState = 'Edit product';
+   $scope.$parent.$parent.currentStateValue = 'products.edit';
    if(!$scope.activeProduct){
      var id = $stateParams.id;
        $scope.$parent.$parent.isPreloading = true;

@@ -2,6 +2,7 @@ app.controller('purchaseListCtrl',['$scope','ApiManager','GenOps','$state',funct
    $scope.$parent.$parent.isPreloading = true;
    $scope.$parent.$parent.isLoginPage = false;   
    $scope.$parent.$parent.currentState = 'Purchase';
+   $scope.$parent.$parent.currentStateValue = 'purchase.list';
     ApiManager.getPurchases()
            .success(function(data){
                $scope.purchases = data;

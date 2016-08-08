@@ -11,7 +11,7 @@
       <div class="input-field col s12">
     <select id="product" ng-model="purchase.product_Id">
       
-        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+        <option value="{{product.id}}" ng-repeat="product in products track by $index">{{product.name}}</option>
        
     </select>
     <label for="product">Product</label>
@@ -61,7 +61,7 @@
       <div class="input-field col s12">
     <select id="product_Id_confirmed" ng-model="purchase.product_Id_confirmed">
       
-        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+        <option value="{{product.id}}" ng-repeat="product in products track by $index">{{product.name}}</option>
        
     </select>
     <label for="product_Id_confirmed">Confirm Product</label>
@@ -83,7 +83,7 @@
       <div class="input-field col s12">
     <select id="product_cleared" ng-model="purchase.product_cleared">
       
-        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+        <option value="{{product.id}}" ng-repeat="product in products track by $index">{{product.name}}</option>
        
     </select>
     <label for="product_cleared">Product Cleared</label>

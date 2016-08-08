@@ -1,5 +1,6 @@
 app.controller('usersListCtrl',['$scope','ApiManager','GenOps','$state',function($scope,ApiManager,GenOps,$state){
    $scope.$parent.$parent.isPreloading = true;
+    $scope.$parent.$parent.currentStateValue = 'users.list'; 
    $scope.$parent.$parent.isLoginPage = false;   
    $scope.$parent.$parent.currentState = 'Users';
     ApiManager.getUsers()

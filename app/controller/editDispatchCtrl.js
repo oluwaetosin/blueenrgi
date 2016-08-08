@@ -1,5 +1,7 @@
 app.controller('editDispatchCtrl',['$scope','ApiManager','GenOps','$stateParams',function($scope,ApiManager,GenOps,$stateParams ){
    $scope.activeDispatch = GenOps.getActiveDispatch();
+   $scope.$parent.$parent.currentStateValue = 'dispatch.edit';
+   $scope.$parent.$parent.currentState = 'dispatch.new';
    function filterDispatch(_dispatch){
        _dispatch.purchase_Id = parseInt(_dispatch.purchase_Id);
        _dispatch.customer_Id = parseInt(_dispatch.customer_Id);

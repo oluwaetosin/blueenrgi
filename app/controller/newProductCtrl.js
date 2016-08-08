@@ -1,5 +1,7 @@
 app.controller('newProductCtrl',['$scope','ApiManager','GenOps',function($scope,ApiManager,GenOps){
    $scope.newProduct = {};
+   $scope.$parent.$parent.currentStateValue = 'products.new';
+   $scope.$parent.$parent.currentState = 'New Product';
    $scope.addProduct = function(_name,_description){
       if(!_name || !_description){
           return false;

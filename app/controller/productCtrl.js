@@ -1,7 +1,8 @@
 app.controller('productCtrl',['$scope','ApiManager','GenOps','$state',function($scope,ApiManager,GenOps,$state){
    $scope.$parent.$parent.isPreloading = true;
    $scope.$parent.$parent.isLoginPage = false;   
-   $scope.$parent.currentState = 'Products';
+   $scope.$parent.$parent.currentState = 'Products';
+    $scope.$parent.$parent.currentStateValue = 'products.list';
     ApiManager.getProducts()
            .success(function(data){
                $scope.products = data;

@@ -1,7 +1,8 @@
 app.controller('purchaseClearanceCtrl',['$scope','ApiManager','GenOps','$stateParams','$timeout',function($scope,ApiManager,GenOps,$stateParams,$timeout){
   
    $scope.$parent.$parent.isLoginPage = false;   
-   $scope.$parent.currentState = 'Purchase Clearance';
+   $scope.$parent.$parent.currentState = 'Purchase Clearance';
+   $scope.$parent.$parent.currentStateValue = 'purchase.clearance';
     $scope.products = [];
     $scope.purchase = {};
     $scope.$parent.$parent.isPreloading = true;

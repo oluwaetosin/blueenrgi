@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
@@ -7,14 +8,27 @@ require '../../vendor/autoload.php';
 require '../../database.php';
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
-
-$app = new \Slim\App;
-
+$configuration = [
+    'settings' => [
+        'displayErrorDetails' => true,
+        'secure'=>false
+    ],
+];
+$c = new \Slim\Container($configuration);
+$app = new \Slim\App($c);
 $app->add(new \Slim\Middleware\JwtAuthentication([
     "path"=>'/',
+    "secure" => false,
     "secret" => getenv("JWT_SECRET"),
     "passthrough" => ["/login","/signup"],
-    "algorithm" => ["HS256", "HS384"]
+    "algorithm" => ["HS256", "HS384"],
+     "error" => function ($request, $response, $arguments) {
+        $data["status"] = "error";
+        $data["message"] = $arguments["message"];
+        return $response
+            ->withHeader("Content-Type", "application/json")
+            ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+    }
 ]));
 $app->get('/users/{id}', function (Request $request, Response $response) {
     try{
@@ -122,7 +136,7 @@ $app->get('/purchase', function (Request $request, Response $response) {
 $app->post('/purchase', function (Request $request, Response $response) {
     try {
       $data = $request->getParsedBody();
-   var_dump($data);
+      
      
      $purchase = new \Bluenergi\Purchase();
    
@@ -141,9 +155,62 @@ $app->post('/purchase', function (Request $request, Response $response) {
      $purchase->product_cleared  = filter_var($data['product_cleared'],FILTER_SANITIZE_STRING);
      $purchase->price_per_litre  = filter_var($data['price_per_litre'],FILTER_SANITIZE_STRING);
      $purchase->purchase_date  = filter_var($data['purchase_date'],FILTER_SANITIZE_STRING);
+     
+     $product = Bluenergi\Products::find($purchase->product_Id);
   
      $response = $purchase->save();
-        
+     $insertedId = $purchase->id;
+     
+     $adminDetail = \Bluenergi\Users::where('level',5)->get();
+     
+     $accountant =  \Bluenergi\Users::where('level',4)->get();
+      $agent =  \Bluenergi\Users::where('level',2)->get();
+      $customMessage = "A payment has been made for ".$product->name ." purchase code is:  ".$insertedId;
+      foreach ($adminDetail as $currDetail){
+          $message = new \Bluenergi\MessageManager("Bluenergi","Bluenergi","3n3rg1");
+          $num = substr($currDetail->phonenumber,0,1 ) == 0 ? "234". substr($currDetail->phonenumber,1) : 
+                                                             $currDetail->phonenumber;
+          $message->setTo($num);
+          $message->setMessage($customMessage);
+         
+          $message->sendSms();
+          
+           $email = new \Bluenergi\EmailManager();
+          $email->setTo($currDetail->email);
+          $email->setSubject("New Purchase code");
+          $email->setMessage($customMessage);
+          $email->sendMailUsingPHPMail();
+      }
+      foreach ($accountant as $currDetail){
+          $message = new \Bluenergi\MessageManager("Bluenergi","Bluenergi","3n3rg1");
+          $num = substr($currDetail->phonenumber,0,1 ) == 0 ? "234". substr($currDetail->phonenumber,1) : 
+                                                             $currDetail->phonenumber;
+          $message->setTo($num);
+          $message->setMessage($customMessage);
+          $message->sendSms();
+          
+           $email = new \Bluenergi\EmailManager();
+          $email->setTo($currDetail->email);
+          $email->setSubject("New Purchase code");
+          $email->setMessage($customMessage);
+          $email->sendMailUsingPHPMail();
+      }
+      foreach ($agent as $currDetail){
+          $message = new \Bluenergi\MessageManager("Bluenergi","Bluenergi","3n3rg1");
+          $num = substr($currDetail->phonenumber,0,1 ) == 0 ? "234". substr($currDetail->phonenumber,1) : 
+                                                             $currDetail->phonenumber;
+          $message->setTo($num);
+          $message->setMessage($message);
+          $message->sendSms();
+          
+          $email = new \Bluenergi\EmailManager();
+          $email->setTo($currDetail->email);
+          $email->setSubject("New Purchase code");
+          $email->setMessage($customMessage);
+          $email->sendMailUsingPHPMail();
+          
+      }
+       
     } catch (Exception $exc) {
         $response = $exc->getMessage();
     }
@@ -210,6 +277,59 @@ $app->put('/purchase/clearance/{id}', function (Request $request, Response $resp
      $purchase->product_cleared  = filter_var($data['product_cleared'],FILTER_SANITIZE_STRING);
      
      $response = $purchase->save();
+     if($response){
+     $adminDetail = \Bluenergi\Users::where('level',5)->get();
+     
+     $accountant =  \Bluenergi\Users::where('level',4)->get();
+      $agent =  \Bluenergi\Users::where('level',2)->get();
+      $customMessage = "A product ".$product->name ." with purchase id:  ".$id ." has been cleared";
+      foreach ($adminDetail as $currDetail){
+          $message = new \Bluenergi\MessageManager("Bluenergi","Bluenergi","3n3rg1");
+          $num = substr($currDetail->phonenumber,0,1 ) == 0 ? "234". substr($currDetail->phonenumber,1) : 
+                                                             $currDetail->phonenumber;
+          $message->setTo($num);
+          $message->setMessage($customMessage);
+           
+          $message->sendSms();
+          
+           $email = new \Bluenergi\EmailManager();
+          $email->setTo($currDetail->email);
+          $email->setSubject("New Purchase code");
+          $email->setMessage($customMessage);
+      
+          $email->sendMailUsingPHPMail();
+      }
+      foreach ($accountant as $currDetail){
+          $message = new \Bluenergi\MessageManager("Bluenergi","Bluenergi","3n3rg1");
+          $num = substr($currDetail->phonenumber,0,1 ) == 0 ? "234". substr($currDetail->phonenumber,1) : 
+                                                             $currDetail->phonenumber;
+          $message->setTo($num);
+          $message->setMessage($customMessage);
+          $message->sendSms();
+          
+           $email = new \Bluenergi\EmailManager();
+          $email->setTo($currDetail->email);
+          $email->setSubject("New Purchase code");
+          $email->setMessage($customMessage);
+          $email->sendMailUsingPHPMail();
+      }
+      foreach ($agent as $currDetail){
+          $message = new \Bluenergi\MessageManager("Bluenergi","Bluenergi","3n3rg1");
+          $num = substr($currDetail->phonenumber,0,1 ) == 0 ? "234". substr($currDetail->phonenumber,1) : 
+                                                             $currDetail->phonenumber;
+          $message->setTo($num);
+          $message->setMessage($message);
+          $message->sendSms();
+          
+          $email = new \Bluenergi\EmailManager();
+          $email->setTo($currDetail->email);
+          $email->setSubject("New Purchase code");
+          $email->setMessage($customMessage);
+          $email->sendMailUsingPHPMail();
+          
+      }
+       
+     }
         
     } catch (Exception $exc) {
        $response = $exc->getMessage();
@@ -325,7 +445,8 @@ $app->get('/dispatch', function (Request $request, Response $response) {
     try{
      $dispatch =  new Bluenergi\Dispatches();
      $response = $dispatch->join('users','users.id','=','dispatches.customer_Id')
-                          ->select("dispatches.*","users.firstname as firstname","users.lastname as lastname")
+                          ->join('purchases','purchases.id','=','dispatches.purchase_Id')
+                          ->select("dispatches.*","users.firstname as firstname","users.lastname as lastname","purchases.price_per_litre as purchase_rate")
                           ->get();
      
     }  catch (Exception $ex){

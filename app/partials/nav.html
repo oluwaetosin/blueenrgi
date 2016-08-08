@@ -1,8 +1,9 @@
- <li ng-if="parentUser && parentUser.level == 1"><a ui-sref="products.list">Product</a></li>
-        <li  ng-if="parentUser"><a ui-sref="purchase.list" ng-if="parentUser && parentUser.level == 1">Purchase</a></li>
-        <li ng-if="parentUser"><a ui-sref="purchase.payment" ng-if="parentUser && parentUser.level == 1">Purchase Payment</a></li>
-        <li ng-if="parentUser"><a ui-sref="purchase.loading">Purchase Loading</a></li>
-         <li ng-if="parentUser"><a ui-sref="purchase.clearance">Purchase Clearance</a></li>
-        <li ng-if="parentUser && parentUser.level == 1"><a ui-sref="dispatch.list">Dispatch</a></li>
-         <li ng-if="parentUser && parentUser.level == 1"><a ui-sref="users.list">Users</a></li>
-         <li ng-if="parentUser"><a ng-click="$parent.logout()">Logout</a></li
+<li ng-if="parentUser && parentUser.level == 5" ng-class="{'active' : (currentStateValue == 'products.list' || currentStateValue == 'products.edit' ||  currentStateValue == 'products.new' )}"><a ui-sref="products.list">Product</a></li>
+        <li  ng-if="parentUser" ng-class="{'active' : (currentStateValue == 'purchase.list' || currentStateValue == 'purchase.edit' ||  currentStateValue == 'purchase.new' )}"><a ui-sref="purchase.list" ng-if="parentUser && parentUser.level == 5">Purchase</a></li>
+        <li ng-if="parentUser" ng-class="{'active' : (currentStateValue == 'purchase.payment' )}"><a ui-sref="purchase.payment" ng-if="parentUser && (parentUser.level == 5 || parentUser.level == 4)">Purchase Payment</a></li>
+        <li ng-if="parentUser" ng-class="{'active' : (currentStateValue == 'purchase.loading' )}"><a ui-sref="purchase.loading">Purchase Loading</a></li>
+         <li ng-if="parentUser" ng-class="{'active' : (currentStateValue == 'purchase.clearance' )}"><a ui-sref="purchase.clearance">Purchase Clearance</a></li>
+        <li ng-if="parentUser && parentUser.level == 5" ng-class="{'active' : (currentStateValue == 'dispatch.list' || currentStateValue == 'dispatch.edit')}"><a ui-sref="dispatch.list">Dispatch</a></li>
+        <li ng-class="{'active' : (currentStateValue == 'dispatch.new')}"><a ui-sref="dispatch.new">New Dispatch</a></li>
+         <li ng-if="parentUser && parentUser.level == 5" ng-class="{'active' : (currentStateValue == 'users.list' || currentStateValue == 'users.edit' ||  currentStateValue == 'users.new' )}"><a ui-sref="users.list">Users</a></li>
+         <li ng-if="parentUser" ng-class="{'active' : (currentStateValue == 'purchase.login' )}"><a ng-click="$parent.logout()">Logout</a></li
