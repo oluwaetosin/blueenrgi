@@ -1,5 +1,5 @@
 <div>
-<ul class="collection">
+<ul class="collection hide-on-med-and-up">
         <li class="collection-item" ng-repeat="purchase in purchases track by $index">
       <i class="material-icons">account_circle</i>
       <span class="title">{{purchase.truck_number}}</span>
@@ -11,6 +11,41 @@
       </p>
     </li>
       </ul>
+    
+    <table class="responsive-table centered bordered striped hide-on-small-only">
+        <thead>
+          <tr>
+              <th data-field="truck-number">Truck Number</th>
+              <th data-field="name">Agent</th>
+              <th data-field="price">Clearance Bank</th>
+               <th data-field="price">Amount Cleared</th>
+                <th data-field="depot">Depot</th>
+                <th data-field="depot">Price Per Litre</th>
+                 <th data-field="depot">Quantity</th>
+                  <th data-field="depot">Product</th>
+                 
+                  <th>Edit</th>
+                    <th data-field="depot"> Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="purchase in purchases track by $index">
+            <td>{{purchase.truck_number}}</td>
+            <td>{{purchase.firstname}} {{purchase.lastname}}</td>
+             <td>{{purchase.clearance_bank}}</td>
+            <td>{{purchase.clearance_amount}}</td>
+            <td>{{purchase.depot}}</td>
+            <td>{{purchase.price_per_litre}}</td>
+             <td>{{purchase.quantity}}</td>
+             <td>{{purchase.product}}</td>
+             <td>{{purchase.product}}</td>
+             <td><a href="" class="waves-effect waves-light" ng-click="edit(purchase)"><i class="material-icons right">mode_edit</i></a></td>
+             <td><a href="" class="waves-effect waves-light"  ng-click="delete(purchase)"><i class="material-icons right">delete</i></a></td>
+            </tr>
+ 
+        </tbody>
+      </table>
 <div id="modal1" class="modal bottom-sheet">
     <div class="modal-content">
       <h4>Confirm Delete</h4>

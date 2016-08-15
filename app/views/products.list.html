@@ -1,4 +1,4 @@
-<ul class="collection with-header">
+<ul class="collection with-header hide-on-med-and-up">
         <li class="collection-header"><h4>All Products</h4></li>
         <li class="collection-item avatar" ng-repeat="product in products track by $index">
       <i class="material-icons">local_gas_station</i>
@@ -14,6 +14,27 @@
 
     </li>
       </ul>
+
+<table class="responsive-table centered striped hide-on-small-only bordered">
+        <thead>
+          <tr>
+              <th data-field="id">Name</th>
+              <th data-field="description">Description</th>
+             <th data-field="edit">Edit</th>
+             <th data-field="delete">Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="product in products track by $index">
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td><a href="" class="waves-effect waves-light" ng-click="edit(product)"><i class="material-icons right">mode_edit</i></a></td>
+            <td><a href="" class="waves-effect waves-light"  ng-click="delete(product)"><i class="material-icons right">delete</i></a></td>
+          </tr>
+          
+      </table>
+            
 <div id="modal1" class="modal bottom-sheet">
     <div class="modal-content">
       <h4>Confirm Delete</h4>

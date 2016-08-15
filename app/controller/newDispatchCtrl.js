@@ -4,7 +4,16 @@ app.controller('newDispatchCtrl',['$scope','ApiManager','GenOps','$stateParams',
    $scope.$parent.$parent.currentState = 'Add Dispatch';
    $scope.$parent.$parent.currentStateValue = 'dispatch.new';
    $scope.products = [];
-    
+   $scope.users = []; 
+     ApiManager.getUsers()
+           .success(function(data){
+               $scope.users = data;
+       $scope.$parent.$parent.isPreloading = false;
+           })
+           .error(function(data){
+               console.log(data);
+               $scope.$parent.isPreloading = false;
+           });
       $scope.addDispatch = function (_dispatch){
           if (_dispatch.payment_due_date && _dispatch.payment_due_date instanceof Date){
            var year = _dispatch.payment_due_date.getFullYear();
@@ -26,7 +35,7 @@ app.controller('newDispatchCtrl',['$scope','ApiManager','GenOps','$stateParams',
            
           }else{
               _dispatch.actual_payment_date = "";
-              _dispatch.amount_paid.amount_paid = 0;
+              _dispatch.amount_paid = 0;
           }
      ApiManager.addDispatch(_dispatch)
               .success(function(data){
