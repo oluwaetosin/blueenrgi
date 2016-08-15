@@ -125,8 +125,12 @@ $app->get('/purchase/{id}', function (Request $request, Response $response) {
 });
 $app->get('/purchase', function (Request $request, Response $response) {
     try{
+         
      $purchase =  new Bluenergi\Purchase();
-     $response = $purchase->get();
+     $response = $purchase->join("users","users.id","=","purchases.users_Id")
+                  ->join("products","products.id","=","purchases.product_Id")
+                 ->select("purchases.*","users.firstname as firstname","users.lastname as lastname","products.name as product")
+                 ->get();
       $response =  json_encode($response);
     }catch(Exception $ex){
         $response =  $ex->getMessage();
@@ -501,6 +505,7 @@ $app->post('/dispatch', function (Request $request, Response $response) {
       
     
      $response = $dispatch->save();
+     //send sms to admin
         
     } catch (Exception $exc) {
         $response =  $exc->getMessage();
