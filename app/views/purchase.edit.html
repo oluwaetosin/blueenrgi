@@ -11,7 +11,7 @@
       <div class="input-field col s12">
     <select id="product" ng-model="activePurchase.product_Id">
       
-        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+        <option value="{{product.id}}" ng-repeat="product in products" ng-selected="product.id == activePurchase.product_Id">{{product.name}}</option>
        
     </select>
     <label  class="active" for="product">Product</label>
@@ -61,7 +61,10 @@
       <div class="input-field col s12">
     <select id="product_Id_confirmed" ng-model="activePurchase.product_Id_confirmed">
       
-        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+        <option value="{{product.id}}" ng-repeat="product in products" 
+                ng-selected="product.id == activePurchase.product_Id_confirmed"
+
+ ">{{product.name}}</option>
        
     </select>
     <label  class="active" for="product_Id_confirmed">Confirm Product</label>
@@ -83,7 +86,7 @@
       <div class="input-field col s12">
     <select id="product_cleared" ng-model="activePurchase.product_cleared">
       
-        <option value="{{product.id}}" ng-repeat="product in products">{{product.name}}</option>
+        <option value="{{product.id}}" ng-repeat="product in products" ng-selected="product.id == activePurchase.product_cleared">{{product.name}}</option>
        
     </select>
     <label  class="active" for="product_cleared">Product Cleared</label>
@@ -92,7 +95,7 @@
     <div class="row">
     
   
-         <md-datepicker ng-model="activePurchase.activePurchase_date" md-placeholder="Enter date"></md-datepicker>
+         <md-datepicker ng-model="activePurchase.purchase_date" md-placeholder="Purchase Date"></md-datepicker>
     
     
     </div>

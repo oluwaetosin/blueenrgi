@@ -6,10 +6,23 @@ app.controller('editPurchaseCtrl',['$scope','ApiManager','GenOps','$stateParams'
        _purchase.amount_payed = parseFloat(_purchase.amount_payed);
        _purchase.price_per_litre = parseFloat(_purchase.price_per_litre);
        _purchase.clearance_amount = parseFloat(_purchase.clearance_amount);
+       if(_purchase.purchase_date && !(_purchase.purchase_date instanceof  Date)){
+          _purchase.purchase_date = new Date(_purchase.purchase_date) 
+       }
        return _purchase;
    }
     $scope.$parent.$parent.currentStateValue = 'purchase.edit';
     $scope.$parent.$parent.currentState = 'Edit Purchase';
+    $scope.products = [];
+    ApiManager.getProducts()
+           .success(function(data){
+               $scope.products = data;
+       $scope.$parent.$parent.isPreloading = false;
+           })
+           .error(function(data){
+               console.log(data);
+               $scope.$parent.isPreloading = false;
+           });
    $scope.activePurchase = GenOps.getActivePurchase() ? sanitizePurchase(GenOps.getActivePurchase()) : null ;
    
    $scope.levels = myConfig.levels;

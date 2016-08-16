@@ -1,4 +1,4 @@
-<ul class="collection">
+<ul class="collection hide-on-med-and-up">
         <li class="collection-item" ng-repeat="user in users">
       <i class="material-icons">account_circle</i>
       <span class="title">{{user.firstname}} {{user.lastname}}</span>
@@ -10,6 +10,32 @@
       </p>
     </li>
       </ul>
+<table class="hide-on-small-only responsive-table centered bordered striped">
+        <thead>
+          <tr>
+              <th data-field="id">Firstname</th>
+              <th data-field="name">Last name</th>
+              <th data-field="price">Email</th>
+              <th data-field="price">Phone Number</th>
+              <th data-field="price">Role</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="user in users track by $index">
+            <td>{{user.firstname}}</td>
+             <td>{{user.lastname}}</td>
+            <td>{{user.email}}</td>
+            <td><span ng-if="user.level == 5">CEO</span>
+                <span ng-if="user.level == 4">Accountant</span>
+                 <span ng-if="user.level == 2">Field Agent</span>
+                 <span ng-if="user.level == 1">Customer</span>
+                 <span ng-if="user.level == 0">Not Active</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+            
 <div id="modal1" class="modal bottom-sheet">
     <div class="modal-content">
       <h4>Confirm Delete</h4>

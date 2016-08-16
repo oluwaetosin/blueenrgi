@@ -1,7 +1,7 @@
 app.controller('purchaseLoadingCtrl',['$scope','ApiManager','GenOps','$stateParams','$timeout',function($scope,ApiManager,GenOps,$stateParams,$timeout){
   
    $scope.$parent.$parent.isLoginPage = false;   
-   $scope.$parent.$parent.currentState = 'Purchase Loaading';
+   $scope.$parent.$parent.currentState = 'Purchase Loading';
    $scope.$parent.$parent.currentStateValue = 'purchase.loading';
     $scope.products = [];
     $scope.purchase = {};

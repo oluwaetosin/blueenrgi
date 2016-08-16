@@ -21,11 +21,11 @@ class MessageManager {
     private $password;
     private $message;
     private $result;
-    function __construct($from,$username,$password) {
+    function __construct($from) {
      
         $this->setFrom($from);
-        $this->setUsername($username);
-        $this->setPassword($password);
+        $this->setUsername(getenv("SMS_USERNAME"));
+        $this->setPassword(getenv("SMS_PWD"));
     }
     public function sendSms(){
         
