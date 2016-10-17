@@ -1,6 +1,7 @@
 app.controller('loginSignupCtrl',['$scope','ApiManager','GenOps','$state','$window',function($scope,ApiManager,GenOps,$state,$window){
    $scope.showLogin = true;
    $scope.showSignup = false;
+    var storage = $window.localStorage;
      $scope.$parent.currentState =    $scope.showSignup ? 'Signup' : 'Login';
      $scope.$parent.currentStateValue = 'login';
    $scope.$parent.isLoginPage = true;
@@ -38,8 +39,6 @@ app.controller('loginSignupCtrl',['$scope','ApiManager','GenOps','$state','$wind
                                     $scope.$parent.isPreloading = false; 
                                     $state.go("products.list");
                                     break;
-                                case 4:
-                                     break;
                                 default :
                                     $scope.$parent.isPreloading = false; 
                                     $state.go("dispatch.new");

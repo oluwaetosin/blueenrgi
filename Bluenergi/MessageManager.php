@@ -48,7 +48,7 @@ class MessageManager {
      $this->setResult(curl_exec($curl));
      $information = curl_getinfo($curl);
      curl_close ($curl);
-     var_dump($information);
+   //  var_dump($information);
      
     }
     function getTo() {
@@ -101,8 +101,5 @@ class MessageManager {
 }
 
 
-$sms = new MessageManager('BLUENERGI','bluenergi','3n3rg1');
-$sms->setMessage("Hello");
-$sms->setTo("+2348060928118");
-$sms->sendSms();
-var_dump($sms->getResult());
+ 
+ 

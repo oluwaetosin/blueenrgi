@@ -15,8 +15,9 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
             });
         };
         api.updateProduct = function(_product){
+            _product._METHOD= 'PUT';
             return $http({
-                method: 'PUT',
+                method: 'POST',
                 url: apiUrl + "product/"+_product.id,
                 data: _product
             });
@@ -48,8 +49,9 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
             });
         }; 
         api.updateUser = function(_user){
+            _user._METHOD= 'PUT';
             return $http({
-                method: 'PUT',
+                method: 'POST',
                 url: apiUrl + "users/" + _user.id,
                 data : _user
             });
@@ -74,15 +76,17 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
             });
         };
         api.addPurchaseLoading = function(_purchase){
+            _purchase._METHOD= 'PUT';
             return $http({
-                method: 'PUT',
+                method: 'POST',
                 url: apiUrl + "purchase/loading/" + _purchase.purchase_id,
                 data: _purchase
             });
         };
         api.addPurchaseClearance = function(_purchase){
+            _purchase._METHOD= 'PUT';
             return $http({
-                method: 'PUT',
+                method: 'POST',
                 url: apiUrl + "purchase/clearance/" + _purchase.purchase_id,
                 data: _purchase
             });
@@ -101,8 +105,9 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
             });
         }; 
         api.updatePurchase = function(_purchase){
+            _purchase._METHOD= 'PUT';
             return $http({
-                method: 'PUT',
+                method: 'POST',
                 url: apiUrl + "purchase/" + _purchase.id,
                 data : _purchase
             });
@@ -135,8 +140,9 @@ app.factory('ApiManager',['myConfig','$http',function(myConfig,$http){
             });
         };
         api.updateDispatch = function(_dispatch){
+            _dispatch._METHOD= 'PUT';
             return $http({
-                method: 'PUT',
+                method: 'POST',
                 url: apiUrl + "dispatch/" + _dispatch.id,
                 data : _dispatch
             });

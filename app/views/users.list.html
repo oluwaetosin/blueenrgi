@@ -26,12 +26,14 @@
             <td>{{user.firstname}}</td>
              <td>{{user.lastname}}</td>
             <td>{{user.email}}</td>
+            <td>{{user.phonenumber}}</td>
             <td><span ng-if="user.level == 5">CEO</span>
                 <span ng-if="user.level == 4">Accountant</span>
                  <span ng-if="user.level == 2">Field Agent</span>
                  <span ng-if="user.level == 1">Customer</span>
                  <span ng-if="user.level == 0">Not Active</span>
             </td>
+            
           </tr>
         </tbody>
       </table>

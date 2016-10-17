@@ -16,9 +16,15 @@
     </select>
     <label  class="active" for="product">Product</label>
   </div>
+      </div>
           <div class="row">
         <div class="input-field col s12">
-            <input  id="usersId" ng-model="activePurchase.users_Id" type="number" class="validate">
+            <select id="usersId" ng-model="activePurchase.users_Id" >
+      
+        <option value="{{product.id}}" ng-repeat="user in users" ng-selected="user.id == activePurchase.users_Id">{{user.firstname}} {{user.lastname}}</option>
+       
+    </select>
+        
           <label  class="active" for="usersId">User</label>
         </div>
       </div>

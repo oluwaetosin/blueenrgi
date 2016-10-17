@@ -18,11 +18,23 @@ class EmailManager {
     private $to;
     private $message;
     private $subject;
+    private $header;
     
     function __construct() {
+        $this->header =  'From: BluEnergi <bluenergi@energidevices.com>' . PHP_EOL .
+    'Reply-To: Bluenergi <bluenergi@energidevices.com>' . PHP_EOL .
+    'X-Mailer: PHP/' . phpversion();
         ;
     }
-    function getFrom() {
+    function getHeader() {
+        return $this->header;
+    }
+
+    function setHeader($header) {
+        $this->header = $header;
+    }
+
+        function getFrom() {
         return $this->from;
     }
 
@@ -47,7 +59,7 @@ class EmailManager {
     }
 
     function sendMailUsingPHPMail(){
-        mail($this->getTo(),$this->getSubject(),$this->getMessage());
+        mail($this->getTo(),$this->getSubject(),$this->getMessage(),$this->header);
     }
     function getSubject() {
         return $this->subject;

@@ -12,7 +12,7 @@ app.controller('purchasePaymentCtrl',['$scope','ApiManager','GenOps','$statePara
            })
            .error(function(data){
                console.log(data);
-               $scope.$parent.isPreloading = false;
+               $scope.$parent.$parent.isPreloading = false;
            });
      ApiManager.getUsers()
            .success(function(data){
@@ -21,7 +21,7 @@ app.controller('purchasePaymentCtrl',['$scope','ApiManager','GenOps','$statePara
            })
            .error(function(data){
                console.log(data);
-               $scope.$parent.isPreloading = false;
+               $scope.$parent.$parent.isPreloading = false;
            });
       $scope.addPurchase = function (_purchase){
            var currentDate = new Date();

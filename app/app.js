@@ -1,4 +1,4 @@
-var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
+var app = angular.module('bluEnergi',['ngMaterial','ui.router','ngMap'])
                  .config(['$stateProvider','$urlRouterProvider','$httpProvider',function($stateProvider, $urlRouterProvider,$httpProvider){
                   $httpProvider.interceptors.push('AuthInterceptor'); 
                   
@@ -10,6 +10,7 @@ var app = angular.module('bluEnergi',['ngMaterial','ui.router'])
                       };
                       $httpProvider.defaults.headers.post['Content-Type'] = ''
                         + 'application/x-www-form-urlencoded; charset=UTF-8';
+                
                   $urlRouterProvider.otherwise("/login");
                   
                

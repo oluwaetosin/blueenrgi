@@ -65,8 +65,8 @@
             <a class="waves-effect waves-light btn btn-block login-button" ng-click="addPurchase(purchase)" ng-disabled="isPreloading"><i class="left material-icons">send </i>Add Purchase</a>
         </div>
     </form>
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red" ui-sref="products.list">
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;" ng-if="$parent.$parent.parentUser && $parent.$parent.parentUser.level >= 4">
+    <a class="btn-floating btn-large red" ui-sref="purchase.list">
       <i class="material-icons">list</i>
     </a>
   </div>

@@ -84,7 +84,7 @@ $app->put('/users/{id}', function (Request $request, Response $response) {
      $user->lastname  = filter_var($data['lastname'],FILTER_SANITIZE_STRING);
      $user->email  = filter_var($data['email'],FILTER_SANITIZE_STRING);
      $user->phonenumber  = filter_var($data['phonenumber'],FILTER_SANITIZE_STRING);
-     $user->password  = md5(getenv("PASSWORD_SALT").filter_var($data['password'],FILTER_SANITIZE_STRING));
+     //$user->password  = md5(getenv("PASSWORD_SALT").filter_var($data['password'],FILTER_SANITIZE_STRING));
      $user->lastseen  = filter_var($data['lastseen'],FILTER_SANITIZE_STRING);
      $user->level  = filter_var($data['level'],FILTER_SANITIZE_STRING);
     
@@ -150,7 +150,7 @@ $app->post('/purchase', function (Request $request, Response $response) {
      $purchase->quantity  = filter_var($data['quantity'],FILTER_SANITIZE_STRING);
      $purchase->amount_payed  = filter_var($data['amount_payed'],FILTER_SANITIZE_STRING);
      $purchase->bank  = filter_var($data['bank'],FILTER_SANITIZE_STRING);
-     $purchase->ticket_no  = filter_var($data['ticket_no'],FILTER_SANITIZE_STRING);
+    // $purchase->ticket_no  = filter_var($data['ticket_no'],FILTER_SANITIZE_STRING);
      $purchase->depot  = filter_var($data['depot'],FILTER_SANITIZE_STRING);
      $purchase->quantity_confirmed  = filter_var($data['quantity_confirmed'],FILTER_SANITIZE_STRING);
      $purchase->product_Id_confirmed  = filter_var($data['product_Id_confirmed'],FILTER_SANITIZE_STRING);   
@@ -242,6 +242,8 @@ $app->put('/purchase/{id}', function (Request $request, Response $response) {
      $purchase->product_cleared  = filter_var($data['product_cleared'],FILTER_SANITIZE_STRING);
      $purchase->price_per_litre  = filter_var($data['price_per_litre'],FILTER_SANITIZE_STRING);
      $purchase->purchase_date  = filter_var($data['purchase_date'],FILTER_SANITIZE_STRING);
+     $purchase->lat  = filter_var($data['lat'],FILTER_SANITIZE_STRING);
+     $purchase->lng  = filter_var($data['lng'],FILTER_SANITIZE_STRING);
   
      $response = $purchase->save();
         
@@ -256,8 +258,10 @@ $app->put('/purchase/loading/{id}', function (Request $request, Response $respon
       $data = $request->getParsedBody();
      $id = $request->getAttribute('id');  
      $purchase = \Bluenergi\Purchase::find($id);
-   
+     
      $purchase->ticket_no  = filter_var($data['ticket_no'],FILTER_SANITIZE_STRING);
+      $purchase->lat  = filter_var($data['latitude'],FILTER_SANITIZE_STRING);
+      $purchase->lng  = filter_var($data['longitude'],FILTER_SANITIZE_STRING);
      $purchase->depot  = filter_var($data['depot'],FILTER_SANITIZE_STRING);
      $purchase->quantity_confirmed  = filter_var($data['quantity_confirmed'],FILTER_SANITIZE_STRING);
      $purchase->product_Id_confirmed  = filter_var($data['product_Id_confirmed'],FILTER_SANITIZE_STRING);   
@@ -275,18 +279,21 @@ $app->put('/purchase/clearance/{id}', function (Request $request, Response $resp
       $data = $request->getParsedBody();
      $id = $request->getAttribute('id');  
      $purchase = \Bluenergi\Purchase::find($id);
+      
    
      $purchase->clearance_amount  = filter_var($data['clearance_amount'],FILTER_SANITIZE_STRING);
      $purchase->clearance_bank  = filter_var($data['clearance_bank'],FILTER_SANITIZE_STRING);
      $purchase->product_cleared  = filter_var($data['product_cleared'],FILTER_SANITIZE_STRING);
+     $purchase->product_Id_confirmed  = filter_var($data['product_Id_confirmed'],FILTER_SANITIZE_STRING);
      
      $response = $purchase->save();
+     
      if($response){
      $adminDetail = \Bluenergi\Users::where('level',5)->get();
-     
+     $product = Bluenergi\Products::find($purchase->product_Id); //initialize product
      $accountant =  \Bluenergi\Users::where('level',4)->get();
       $agent =  \Bluenergi\Users::where('level',2)->get();
-      $customMessage = "A product ".$product->name ." with purchase id:  ".$id ." has been cleared";
+      $customMessage = "A product [".$product->name ."] with purchase id:  [".$id ."] has been cleared";
       foreach ($adminDetail as $currDetail){
           $message = new \Bluenergi\MessageManager("Bluenergi");
           $num = substr($currDetail->phonenumber,0,1 ) == 0 ? "234". substr($currDetail->phonenumber,1) : 
@@ -521,7 +528,7 @@ $app->post('/dispatch', function (Request $request, Response $response) {
             $adminDetail = \Bluenergi\Users::where('level',5)->get();
           
     
-      $customMessage = "A purchase of [".$dispatch->sold_qty." litres] has been made for ".$purchaseDetails[0]->name ." by :  ".$customer->firstname . " ".$customer->firstname;
+      $customMessage = "A purchase of [".$dispatch->sold_qty." litres] has been made for [".$purchaseDetails[0]->product ."] by :  ".$customer->firstname . " ".$customer->lastname;
       foreach ($adminDetail as $currDetail){
           $message = new \Bluenergi\MessageManager("Bluenergi");
           $num = substr($currDetail->phonenumber,0,1 ) == 0 ? "234". substr($currDetail->phonenumber,1) : 
