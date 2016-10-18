@@ -162,7 +162,7 @@ $app->post('/purchase', function (Request $request, Response $response) {
      
      $product = Bluenergi\Products::find($purchase->product_Id);
   
-     $response = $purchase->save();
+     $response =  $purchase->save();
      $insertedId = $purchase->id;
      
      $adminDetail = \Bluenergi\Users::where('level',5)->get();
@@ -500,7 +500,7 @@ $app->post('/dispatch', function (Request $request, Response $response) {
      $data = $request->getParsedBody();
      $dispatch = new \Bluenergi\Dispatches();
    
-      $dispatch->purchase_Id         = filter_var($data['purchase_Id'],FILTER_SANITIZE_STRING);
+      $dispatch->purchase_Id        = filter_var($data['purchase_Id'],FILTER_SANITIZE_STRING);
      $dispatch->customer_Id         = filter_var($data['customer_Id'],FILTER_SANITIZE_STRING);
      $dispatch->sold_qty            = filter_var($data['sold_qty'],FILTER_SANITIZE_STRING);
      $dispatch->storage_balance     = filter_var($data['storage_balance'],FILTER_SANITIZE_STRING);
@@ -509,10 +509,13 @@ $app->post('/dispatch', function (Request $request, Response $response) {
      $dispatch->payment_due_date    = filter_var($data['payment_due_date'],FILTER_SANITIZE_STRING);
      $dispatch->actual_payment_date = filter_var($data['actual_payment_date'],FILTER_SANITIZE_STRING);
      $dispatch->amount_paid         = filter_var($data['amount_paid'],FILTER_SANITIZE_STRING);
-      $dispatch->comment             = filter_var($data['comment'],FILTER_SANITIZE_STRING);
+     $dispatch->latitude            = filter_var($data['latitude'],FILTER_SANITIZE_STRING); 
+     $dispatch->longitude           = filter_var($data['longitude'],FILTER_SANITIZE_STRING);     
+     $dispatch->comment             = filter_var($data['comment'],FILTER_SANITIZE_STRING);
+     $dispatch->transac_code        = \Bluenergi\Utilities::getRandomToken(5,'alphanumeric');
       
     
-     $response = $dispatch->save();
+     $response = ['status'=>$dispatch->save(),'data'=>$dispatch->transac_code];
      //send sms to admin
      if($response){
      
@@ -548,7 +551,7 @@ $app->post('/dispatch', function (Request $request, Response $response) {
      
         
     } catch (Exception $exc) {
-        $response =  $exc->getMessage();
+        $response =  ['status'=>0,'data'=>$exc->getMessage()];
     }
     echo json_encode($response);
 });
