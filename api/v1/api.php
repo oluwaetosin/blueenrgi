@@ -28,6 +28,10 @@ $app->add(new \Slim\Middleware\JwtAuthentication([
         return $response
             ->withHeader("Content-Type", "application/json")
             ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+    },
+    "callback" => function ($request, $response, $arguments) use ($container) {
+        $container["jwt"] = $arguments["decoded"];
+        file_put_contents('args', json_encode($container));
     }
 ]));
 $app->get('/users/{id}', function (Request $request, Response $response) {
@@ -530,7 +534,7 @@ $app->post('/dispatch', function (Request $request, Response $response) {
          }
             $adminDetail = \Bluenergi\Users::where('level',5)->get();
           
-    
+      $accountant =  \Bluenergi\Users::where('level',4)->get();
       $customMessage = "A purchase of [".$dispatch->sold_qty." litres] has been made for [".$purchaseDetails[0]->product ."] by :  ".$customer->firstname . " ".$customer->lastname;
       foreach ($adminDetail as $currDetail){
           $message = new \Bluenergi\MessageManager("Bluenergi");
@@ -539,6 +543,21 @@ $app->post('/dispatch', function (Request $request, Response $response) {
           $message->setTo($num);
           $message->setMessage($customMessage);
          
+          $message->sendSms();
+          
+           $email = new \Bluenergi\EmailManager();
+          $email->setTo($currDetail->email);
+          $email->setSubject("New Purchase code");
+          $email->setMessage($customMessage);
+          $email->sendMailUsingPHPMail();
+      }
+      
+      foreach ($accountant as $currDetail){
+          $message = new \Bluenergi\MessageManager("Bluenergi");
+          $num = substr($currDetail->phonenumber,0,1 ) == 0 ? "234". substr($currDetail->phonenumber,1) : 
+                                                             $currDetail->phonenumber;
+          $message->setTo($num);
+          $message->setMessage($customMessage);
           $message->sendSms();
           
            $email = new \Bluenergi\EmailManager();
